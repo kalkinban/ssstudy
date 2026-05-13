@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold War Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E24B4A;
+    --red-dark: #A32D2D;
+    --red-light: #FCEBEB;
+    --blue: #185FA5;
+    --blue-light: #E6F1FB;
+    --blue-dark: #0C447C;
+    --gold: #BA7517;
+    --gold-light: #FAEEDA;
+    --green: #3B6D11;
+    --green-light: #EAF3DE;
+    --purple: #3C3489;
+    --purple-light: #EEEDFE;
+    --bg: #FAFAF8;
+    --bg-surface: #FFFFFF;
+    --bg-muted: #F4F2EB;
+    --text: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --border: rgba(0,0,0,0.1);
+    --border-strong: rgba(0,0,0,0.2);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --bg-surface: #232320;
+      --bg-muted: #2a2a27;
+      --text: #F4F2EB;
+      --text-secondary: #9a9890;
+      --border: rgba(255,255,255,0.1);
+      --border-strong: rgba(255,255,255,0.2);
+      --red-light: #3a1515;
+      --blue-light: #0d2440;
+      --gold-light: #2a1e06;
+      --green-light: #162508;
+      --purple-light: #1a1838;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Layout ── */
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red) 0%, var(--red-dark) 50%, #1a1a18 100%);
+  }
+
+  .header-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .site-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text);
+  }
+
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  .header-meta span::before { content: '▸ '; color: var(--red); }
+
+  /* ── Nav tabs ── */
+  .nav-tabs {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .nav-tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.625rem 1rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.15s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .nav-tab:hover { color: var(--text); }
+
+  .nav-tab.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+    font-weight: 500;
+  }
+
+  /* ── Sections ── */
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  .section-block { margin-bottom: 2.5rem; }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  /* ── Term cards ── */
+  .term-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.625rem;
+  }
+
+  .term-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    background: var(--bg-surface);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .term-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent-color, var(--red));
+  }
+
+  .term-card:hover { border-color: var(--border-strong); background: var(--bg-muted); }
+  .term-card.open { background: var(--bg-muted); border-color: var(--border-strong); }
+
+  .term-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .term-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .term-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .badge-policy   { background: var(--red-light);    color: var(--red-dark); }
+  .badge-person   { background: var(--blue-light);   color: var(--blue-dark); }
+  .badge-concept  { background: var(--gold-light);   color: #633806; }
+  .badge-event    { background: var(--green-light);  color: var(--green); }
+  .badge-place    { background: #F1EFE8;             color: #444441; }
+  .badge-tactic   { background: var(--purple-light); color: var(--purple); }
+
+  .toggle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    margin-top: 1px;
+  }
+  .term-card.open .toggle { transform: rotate(45deg); }
+
+  .term-def {
+    display: none;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+  .term-card.open .term-def { display: block; }
+
+  /* ── Timeline ── */
+  .timeline { position: relative; padding-left: 2.25rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border-strong);
+  }
+
+  .tl-item { position: relative; margin-bottom: 1.5rem; }
+
+  .tl-dot {
+    position: absolute;
+    left: -2rem;
+    top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    outline: 2px solid var(--bg);
+    border: 1.5px solid var(--red);
+  }
+  .tl-dot.blue  { background: var(--blue);  border-color: var(--blue); }
+  .tl-dot.gold  { background: var(--gold);  border-color: var(--gold); }
+  .tl-dot.green { background: var(--green); border-color: var(--green); }
+
+  .tl-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--red);
+    margin-bottom: 2px;
+  }
+  .tl-year.blue  { color: var(--blue); }
+  .tl-year.gold  { color: var(--gold); }
+  .tl-year.green { color: var(--green); }
+
+  .tl-title { font-size: 14px; font-weight: 500; color: var(--text); }
+  .tl-note  { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-top: 3px; }
+
+  .tl-legend {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .tl-legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-secondary);
+  }
+  .tl-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── Quiz ── */
+  .quiz-wrap {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .quiz-progress {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1.25rem;
+  }
+  .quiz-pip {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border-strong);
+    transition: background 0.3s;
+  }
+  .quiz-pip.done   { background: var(--green); }
+  .quiz-pip.active { background: var(--red); }
+
+  .quiz-q {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    min-height: 48px;
+  }
+
+  .quiz-opts { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+
+  .quiz-opt {
+    font-size: 13px;
+    padding: 0.625rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.12s, border-color 0.12s;
+    line-height: 1.4;
+  }
+  .quiz-opt:hover:not([disabled]) { background: var(--bg-muted); border-color: var(--border-strong); }
+  .quiz-opt.correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 500; }
+  .quiz-opt.wrong   { background: var(--red-light);   border-color: var(--red);   color: var(--red-dark); }
+  .quiz-opt[disabled] { cursor: default; }
+
+  .quiz-feedback {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    min-height: 16px;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .quiz-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .quiz-btn:hover { background: var(--bg-muted); color: var(--text); }
+
+  .quiz-score {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .quiz-result {
+    text-align: center;
+    padding: 1.5rem 0 0.5rem;
+  }
+  .quiz-result .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .quiz-result .big em { color: var(--red); font-style: italic; }
+  .quiz-result p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0.5rem 0 1rem;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 2.5rem 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-sym {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Search ── */
+  .search-wrap { margin-bottom: 1.25rem; position: relative; }
+  .search-input {
+    width: 100%;
+    padding: 0.625rem 1rem 0.625rem 2.25rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 7px;
+    background: var(--bg-surface);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--red); }
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 14px;
+    pointer-events: none;
+  }
+  .no-results {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 1rem 0;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-eyebrow">Study Guide</div>
+    <h1>The <em>Cold War</em><br>&amp; Communist Era</h1>
+    <div class="header-meta">
+      <span>42 key terms</span>
+      <span>Interactive flashcards</span>
+      <span>Practice quiz</span>
+      <span>Key timeline</span>
+    </div>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav-tabs" role="tablist">
+    <button class="nav-tab active" data-tab="terms"   role="tab">All Terms</button>
+    <button class="nav-tab"        data-tab="timeline" role="tab">Timeline</button>
+    <button class="nav-tab"        data-tab="quiz"     role="tab">Quiz</button>
+  </nav>
+
+  <!-- ══════════ TAB: TERMS ══════════ -->
+  <section class="tab-section active" id="tab-terms">
+
+    <div class="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input class="search-input" type="search" id="term-search" placeholder="Search terms…" aria-label="Search terms">
+    </div>
+    <div class="no-results" id="no-results">No terms match your search.</div>
+
+    <div class="section-block">
+      <div class="section-label">Ideologies &amp; Systems</div>
+      <div class="term-grid" id="grid-ideology"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Key Figures</div>
+      <div class="term-grid" id="grid-people"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Policies &amp; Doctrines</div>
+      <div class="term-grid" id="grid-policy"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Tactics &amp; Methods</div>
+      <div class="term-grid" id="grid-tactics"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Events &amp; Places</div>
+      <div class="term-grid" id="grid-events"></div>
+    </div>
+
+  </section>
+
+  <!-- ══════════ TAB: TIMELINE ══════════ -->
+  <section class="tab-section" id="tab-timeline">
+    <div class="tl-legend">
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--red)"></div>Soviet / Communist</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--blue)"></div>Western / US-led</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--gold)"></div>Turning point</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--green)"></div>Dissolution</div>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- ══════════ TAB: QUIZ ══════════ -->
+  <section class="tab-section" id="tab-quiz">
+    <div class="quiz-wrap">
+      <div class="quiz-progress" id="quiz-progress"></div>
+      <div class="quiz-q"    id="quiz-q"></div>
+      <div class="quiz-opts" id="quiz-opts"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <div class="quiz-footer">
+        <button class="quiz-btn" id="quiz-next">Next →</button>
+        <div class="quiz-score" id="quiz-score"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-sym">★ ★ ★</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <footer class="site-footer">
+    Cold War &amp; Communist Era Study Guide · click cards to reveal definitions
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+/* ══════════════════════════════════════
+   DATA
+══════════════════════════════════════ */
+const TERMS = {
+  ideology: [
+    { name:"Communism vs Capitalism", badge:"concept",
+      def:"The central ideological battle of the Cold War. Communism advocated collective ownership of property and a classless society (championed by the USSR), while capitalism defended private ownership, free markets, and individual economic freedom (championed by the USA)." },
+    { name:"Containment", badge:"policy",
+      def:"The US foreign policy strategy, articulated by diplomat George Kennan, aimed at preventing the further spread of Soviet communism. The idea was to 'contain' it where it already existed and stop the domino effect of nations falling to communist rule." },
+    { name:"Nationalism", badge:"concept",
+      def:"Strong loyalty to one's own nation, often as a force resisting foreign domination. In the Cold War, nationalist movements sometimes aligned with communism (Vietnam, China) or opposed Soviet control (Eastern European uprisings)." },
+    { name:"Propaganda", badge:"tactic",
+      def:"Biased information used by both superpowers to shape public opinion at home and abroad. The US used Radio Free Europe; the USSR controlled all state media. Both sides portrayed the enemy as threatening and immoral." },
+    { name:"Censorship", badge:"tactic",
+      def:"In Soviet-aligned states, the government controlled all media, art, and information. Citizens had no access to foreign news, and intellectuals who challenged the regime were silenced, imprisoned, or sent to gulags." },
+    { name:"Red Scare", badge:"concept",
+      def:"Periods of intense anti-communist fear in the USA — notably the 1950s McCarthyism era. Americans suspected of communist sympathies were investigated, blacklisted, or imprisoned, often with little or no evidence." },
+  ],
+  people: [
+    { name:"Vladimir Lenin", badge:"person",
+      def:"Leader of the 1917 Bolshevik Revolution that overthrew the Russian tsar. Founded the Soviet state and developed Marxism-Leninism — the idea that a vanguard party should lead the revolution on behalf of the working class. Died 1924." },
+    { name:"Josef Stalin", badge:"person",
+      def:"Soviet dictator (1924–1953) who industrialized the USSR through forced collectivization, orchestrated the Great Purge to eliminate political rivals, and built the Gulag prison camp network. Allied with the West in WWII but dominated Eastern Europe afterward." },
+    { name:"Mao Zedong", badge:"person",
+      def:"Leader of the Chinese Communist Party who won the Chinese Civil War in 1949 and founded the People's Republic of China. Launched the disastrous Great Leap Forward and Cultural Revolution, resulting in tens of millions of deaths." },
+    { name:"Chiang Kai-Shek", badge:"person",
+      def:"Nationalist leader of China and head of the Kuomintang (KMT) party. Lost the Chinese Civil War to Mao Zedong in 1949 and retreated to Taiwan, where he established the Republic of China government." },
+    { name:"Sun Yat-Sen", badge:"person",
+      def:"Chinese revolutionary and first president of the Republic of China (1912). Called the 'Father of the Nation' in both mainland China and Taiwan. Founded the Nationalist Party (Kuomintang) and advocated his Three Principles of the People." },
+    { name:"Ho Chi Minh", badge:"person",
+      def:"Vietnamese communist revolutionary and leader of North Vietnam. Led the Viet Minh independence movement against French colonialism and later directed the fight against South Vietnam and the USA in the Vietnam War." },
+    { name:"Nicolae Ceaușescu", badge:"person",
+      def:"Communist dictator of Romania (1965–1989), notorious for a brutal, isolationist regime and cult of personality. His government impoverished citizens and executed dissidents. He was overthrown and executed by firing squad in December 1989." },
+    { name:"Mikhail Gorbachev", badge:"person",
+      def:"Final leader of the Soviet Union (1985–1991). Introduced glasnost (openness) and perestroika (restructuring) to reform the USSR, but these policies inadvertently accelerated the collapse of Soviet power across Eastern Europe and ultimately the USSR itself." },
+    { name:"Ronald Reagan", badge:"person",
+      def:"US President (1981–1989) who escalated pressure on the Soviet Union through the Reagan Doctrine — supporting anti-communist insurgencies worldwide and massively increasing military spending, contributing to Soviet economic strain and eventual collapse." },
+  ],
+  policy: [
+    { name:"Truman Doctrine", badge:"policy",
+      def:"1947 policy by President Truman pledging US military and economic support to any nation threatened by communist takeover. First applied to Greece and Turkey; it established the USA's commitment to containment on a global scale." },
+    { name:"Marshall Plan", badge:"policy",
+      def:"1948 US program providing over $13 billion in economic aid to rebuild war-devastated Western European economies. Aimed to prevent poverty-stricken nations from turning to communism. The USSR rejected it and forbade satellite states from accepting it." },
+    { name:"Glasnost and Perestroika", badge:"policy",
+      def:"Gorbachev's twin reforms: glasnost (openness) loosened censorship and allowed political debate; perestroika (restructuring) decentralized the Soviet economy. Both policies, intended to save the USSR, instead hastened its disintegration." },
+    { name:"Collectivization", badge:"policy",
+      def:"Soviet policy forcibly merging private farms into state-run collective farms (kolkhozy). Peasants who resisted were deported or killed. Collectivization reduced agricultural output dramatically, contributing to devastating famines including the Holodomor." },
+    { name:"Dekulakization", badge:"policy",
+      def:"Stalin's campaign (1930–31) to destroy the kulak class — prosperous peasant farmers seen as class enemies. Kulaks were arrested, executed, or deported to gulags. An estimated 1.8 million were deported in 1930–31 alone." },
+    { name:"Economic Aid", badge:"policy",
+      def:"Both superpowers used economic assistance as a Cold War tool — the USA through the Marshall Plan and foreign aid, the USSR by subsidizing allied governments. Aid came with political strings, deepening client states' dependence on their patron." },
+    { name:"Military Alliances", badge:"policy",
+      def:"Formal defense pacts divided the world into blocs: NATO (1949) aligned Western democracies under US leadership; the Warsaw Pact (1955) bound Eastern European states to the USSR. An attack on one member obligated all others to respond." },
+  ],
+  tactics: [
+    { name:"Proxy Wars", badge:"tactic",
+      def:"Conflicts where the US and USSR supported opposing sides without fighting each other directly — avoiding nuclear escalation while advancing their interests. Korea, Vietnam, Angola, and Afghanistan were all proxy battlegrounds of the Cold War." },
+    { name:"Arms Race", badge:"tactic",
+      def:"The escalating competition between the USA and USSR to develop more powerful nuclear weapons and delivery systems. Both sides built enough weapons to destroy the world many times over, underpinned by Mutually Assured Destruction (MAD)." },
+    { name:"Nuclear Weapons", badge:"tactic",
+      def:"Atomic and hydrogen bombs became the defining weapons of the Cold War. The USA used them on Japan in 1945; the USSR tested its first bomb in 1949. Their existence created a balance of terror that paradoxically prevented direct superpower conflict." },
+    { name:"Blockades", badge:"tactic",
+      def:"The Soviet Union blockaded West Berlin in 1948–49, cutting off road and rail supply routes to force the Western powers to abandon the city. The Western response — the Berlin Airlift — thwarted the blockade without military confrontation." },
+    { name:"Airlifts", badge:"tactic",
+      def:"The Berlin Airlift (1948–49) saw Western powers fly over 200,000 flights to supply West Berlin during the Soviet blockade. It was a propaganda triumph showing Western resolve and commitment to defending democratic outposts behind the Iron Curtain." },
+    { name:"Guerrilla Warfare", badge:"tactic",
+      def:"Irregular combat tactics used by weaker forces against conventional armies — hit-and-run attacks, ambushes, and blending into civilian populations. Used extensively by communist insurgencies in Vietnam, China, Cuba, and many other Cold War conflicts." },
+    { name:"Psychological Warfare", badge:"tactic",
+      def:"Efforts to influence the morale, beliefs, and behavior of enemy populations and soldiers. Both sides used broadcasts, leaflets, and cultural programs. The CIA funded covert cultural projects; the USSR beamed propaganda into Western countries." },
+  ],
+  events: [
+    { name:"Vietnam War", badge:"event",
+      def:"(1955–1975) A Cold War proxy conflict in which North Vietnam (communist, backed by China and the USSR) fought South Vietnam (backed by the USA). After years of costly fighting, US forces withdrew in 1973; South Vietnam fell in 1975." },
+    { name:"Korean War", badge:"event",
+      def:"(1950–1953) North Korea (backed by China and the USSR) invaded South Korea, prompting a US-led UN intervention. The war ended in an armistice at roughly the original border, leaving a divided peninsula and technically a war never formally ended." },
+    { name:"Great Purge", badge:"event",
+      def:"Stalin's campaign of political repression (1936–1938) in which hundreds of thousands of Soviet citizens — including most senior military officers and Communist Party rivals — were executed or sent to gulags on fabricated charges of treason." },
+    { name:"Gulag", badge:"place",
+      def:"The Soviet network of forced labor camps where political prisoners, criminals, and 'class enemies' were sent. At its peak, millions were imprisoned in brutal conditions across Siberia and Central Asia. The gulag became a symbol of communist repression." },
+    { name:"Holodomor", badge:"event",
+      def:"The Soviet-engineered famine (1932–33) in Ukraine, caused by Stalin's forced collectivization and grain quotas. An estimated 3.5–7.5 million Ukrainians died of starvation. Ukraine and many countries now recognize it as a genocide." },
+    { name:"Berlin Wall", badge:"place",
+      def:"Built by East Germany in 1961 to stop the mass exodus of citizens to West Berlin. It physically divided the city until 1989 when it fell following mass protests. The Wall became the defining symbol of the Iron Curtain and communist repression." },
+    { name:"Great Leap Forward", badge:"event",
+      def:"Mao's disastrous economic campaign (1958–1962) to rapidly transform China into a communist industrial society. Collectivization and unrealistic steel quotas caused one of history's worst famines, killing an estimated 15–55 million people." },
+    { name:"Iron Curtain", badge:"concept",
+      def:"Winston Churchill's 1946 term for the ideological and physical boundary dividing communist Eastern Europe from democratic Western Europe. It symbolized the division of the continent — East under Soviet domination, West aligned with the USA." },
+    { name:"Baltic States", badge:"place",
+      def:"Estonia, Latvia, and Lithuania — small nations on the Baltic Sea forcibly incorporated into the Soviet Union in 1940. They were among the first Soviet republics to declare independence as the USSR weakened, formally regaining it in 1991." },
+    { name:"Eastern Bloc", badge:"place",
+      def:"The group of Soviet-dominated communist states in Central and Eastern Europe, including Poland, East Germany, Czechoslovakia, Hungary, Romania, Bulgaria, and Albania. They were satellite states controlled by Moscow through economic and military pressure." },
+    { name:"Satellite States", badge:"place",
+      def:"Countries nominally independent but effectively controlled by the Soviet Union — including Poland, Hungary, Czechoslovakia, East Germany, Romania, and Bulgaria. They had communist governments installed or backed by Moscow and could not pursue independent foreign policies." },
+    { name:"CCP", badge:"place",
+      def:"The Chinese Communist Party, founded in 1921. Under Mao Zedong, the CCP won the Chinese Civil War and has governed mainland China since 1949. It remains the sole ruling party of the People's Republic of China today." },
+    { name:"North Korea", badge:"place",
+      def:"Established in 1948 under Soviet-backed Kim Il-Sung after the division of Korea. Launched the Korean War in 1950. Has been ruled by the Kim family dynasty ever since, maintaining an extreme form of communist totalitarianism and nuclear weapons program." },
+  ],
+};
+
+const TIMELINE = [
+  { year:"1917", title:"Bolshevik Revolution", note:"Lenin's communist takeover of Russia creates the world's first Soviet state.", color:"red" },
+  { year:"1924", title:"Stalin rises to power", note:"Following Lenin's death, Stalin maneuvers to become the dominant leader of the USSR.", color:"red" },
+  { year:"1932–33", title:"Holodomor", note:"Soviet-engineered famine kills millions in Ukraine.", color:"red" },
+  { year:"1936–38", title:"Great Purge", note:"Stalin's mass political repression executes or imprisons hundreds of thousands.", color:"red" },
+  { year:"1945", title:"End of WWII / Cold War begins", note:"The wartime alliance between the USA and USSR breaks down as ideological rivalry intensifies.", color:"gold" },
+  { year:"1947", title:"Truman Doctrine & Marshall Plan", note:"USA commits to containment and funds European reconstruction to resist communism.", color:"blue" },
+  { year:"1948–49", title:"Berlin Blockade & Airlift", note:"Soviets blockade West Berlin; Western powers respond with a massive airlift.", color:"blue" },
+  { year:"1949", title:"NATO founded / PRC established", note:"Western military alliance formed; Mao Zedong wins Chinese Civil War.", color:"gold" },
+  { year:"1950–53", title:"Korean War", note:"First major hot proxy conflict of the Cold War ends in stalemate.", color:"red" },
+  { year:"1955", title:"Warsaw Pact formed", note:"Soviet military alliance formalizes Eastern Bloc structure.", color:"red" },
+  { year:"1958–62", title:"Great Leap Forward", note:"Mao's collectivization campaign causes famine killing tens of millions in China.", color:"red" },
+  { year:"1961", title:"Berlin Wall built", note:"East Germany erects wall to stop mass emigration to West Berlin.", color:"red" },
+  { year:"1965–75", title:"Vietnam War", note:"USA fails to prevent communist North Vietnam from reunifying the country.", color:"gold" },
+  { year:"1985", title:"Gorbachev takes power", note:"Launches glasnost and perestroika reform programs in the USSR.", color:"gold" },
+  { year:"1989", title:"Fall of the Berlin Wall", note:"Mass protests across Eastern Europe topple communist regimes.", color:"green" },
+  { year:"1991", title:"USSR dissolves", note:"The Soviet Union formally collapses; Cold War ends.", color:"green" },
+];
+
+const QUIZ_QUESTIONS = [
+  { q:"Which US policy aimed to prevent the spread of Soviet communism beyond where it already existed?", opts:["Marshall Plan","Containment","Truman Doctrine","Red Scare"], answer:1 },
+  { q:"What was the name of Gorbachev's policy of political openness in the USSR?", opts:["Perestroika","Glasnost","Collectivization","Dekulakization"], answer:1 },
+  { q:"The Berlin Airlift was a Western response to what Soviet action?", opts:["Building the Berlin Wall","Invading South Korea","Blockading West Berlin","Establishing the Warsaw Pact"], answer:2 },
+  { q:"Who led the Chinese Communist Party to victory in China's Civil War in 1949?", opts:["Sun Yat-Sen","Chiang Kai-Shek","Ho Chi Minh","Mao Zedong"], answer:3 },
+  { q:"What term did Winston Churchill use to describe the division between communist Eastern Europe and democratic Western Europe?", opts:["Red Line","Iron Curtain","Eastern Bloc","Containment Zone"], answer:1 },
+  { q:"The Holodomor was a famine that killed millions in which country?", opts:["Poland","Russia","Ukraine","Romania"], answer:2 },
+  { q:"Which US program provided over $13 billion to rebuild Western European economies after WWII?", opts:["Truman Doctrine","Reagan Doctrine","Marshall Plan","NATO Treaty"], answer:2 },
+  { q:"Stalin's campaign to destroy prosperous peasant farmers was known as?", opts:["Collectivization","Dekulakization","Great Purge","Glasnost"], answer:1 },
+  { q:"The Korean War ended in?", opts:["A US victory","A North Korean victory","A Chinese victory","An armistice / stalemate"], answer:3 },
+  { q:"Which Soviet leader's reforms inadvertently accelerated the collapse of the USSR?", opts:["Stalin","Lenin","Gorbachev","Ceaușescu"], answer:2 },
+  { q:"Ho Chi Minh led communist forces in which country?", opts:["Korea","China","Vietnam","Cuba"], answer:2 },
+  { q:"The Great Leap Forward was launched by Mao Zedong in which decade?", opts:["1940s","1950s","1960s","1970s"], answer:1 },
+  { q:"Countries controlled by the USSR but nominally independent were called?", opts:["Puppet states","Iron states","Satellite states","Proxy states"], answer:2 },
+  { q:"During the Cold War, conflicts where the USA and USSR backed opposing sides without fighting directly were known as?", opts:["Nuclear wars","Proxy wars","Guerrilla wars","Trade wars"], answer:1 },
+  { q:"Ronald Reagan's strategy of supporting anti-communist insurgencies worldwide is associated with?", opts:["Containment","Détente","The Reagan Doctrine","MAD"], answer:2 },
+];
+
+/* ══════════════════════════════════════
+   RENDER TERMS
+══════════════════════════════════════ */
+function buildCard(term) {
+  const card = document.createElement('div');
+  card.className = 'term-card';
+  card.dataset.name = term.name.toLowerCase();
+  card.dataset.def  = term.def.toLowerCase();
+
+  const accentMap = { policy:'var(--red)', person:'var(--blue)', concept:'var(--gold)', event:'var(--green)', place:'#888', tactic:'var(--purple)' };
+  card.style.setProperty('--accent-color', accentMap[term.badge] || 'var(--red)');
+
+  card.innerHTML = `
+    <div class="term-head">
+      <div class="term-name">${term.name}</div>
+      <span class="term-badge badge-${term.badge}">${term.badge}</span>
+      <span class="toggle">+</span>
+    </div>
+    <div class="term-def">${term.def}</div>
+  `;
+  card.addEventListener('click', () => card.classList.toggle('open'));
+  return card;
+}
+
+Object.entries(TERMS).forEach(([key, list]) => {
+  const grid = document.getElementById('grid-' + key);
+  if (grid) list.forEach(t => grid.appendChild(buildCard(t)));
+});
+
+/* ── Search ── */
+const searchInput = document.getElementById('term-search');
+const noResults   = document.getElementById('no-results');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  let visible = 0;
+  document.querySelectorAll('.term-card').forEach(card => {
+    const match = !q || card.dataset.name.includes(q) || card.dataset.def.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.querySelectorAll('.section-block').forEach(block => {
+    const anyVisible = [...block.querySelectorAll('.term-card')].some(c => c.style.display !== 'none');
+    block.style.display = anyVisible ? '' : (q ? 'none' : '');
+  });
+  noResults.style.display = (q && visible === 0) ? 'block' : 'none';
+});
+
+/* ══════════════════════════════════════
+   TIMELINE
+══════════════════════════════════════ */
+const tlContainer = document.getElementById('timeline');
+TIMELINE.forEach(item => {
+  const el = document.createElement('div');
+  el.className = 'tl-item';
+  el.innerHTML = `
+    <div class="tl-dot ${item.color === 'red' ? '' : item.color}"></div>
+    <div class="tl-year ${item.color === 'red' ? '' : item.color}">${item.year}</div>
+    <div class="tl-title">${item.title}</div>
+    <div class="tl-note">${item.note}</div>
+  `;
+  tlContainer.appendChild(el);
+});
+
+/* ══════════════════════════════════════
+   QUIZ
+══════════════════════════════════════ */
+let qIndex = 0, score = 0, answered = false;
+const shuffled = [...QUIZ_QUESTIONS].sort(() => Math.random() - 0.5);
+
+function renderQuiz() {
+  const total = shuffled.length;
+  const q = shuffled[qIndex];
+
+  // Progress pips
+  const prog = document.getElementById('quiz-progress');
+  prog.innerHTML = shuffled.map((_, i) => {
+    const cls = i < qIndex ? 'done' : i === qIndex ? 'active' : '';
+    return `<div class="quiz-pip ${cls}"></div>`;
+  }).join('');
+
+  document.getElementById('quiz-q').textContent = q.q;
+  document.getElementById('quiz-feedback').textContent = '';
+  document.getElementById('quiz-score').textContent = `${score} / ${total}`;
+
+  const opts = document.getElementById('quiz-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => {
+      if (answered) return;
+      answered = true;
+      [...opts.querySelectorAll('.quiz-opt')].forEach(b => b.disabled = true);
+      if (i === q.answer) {
+        btn.classList.add('correct');
+        score++;
+        document.getElementById('quiz-feedback').textContent = '✓ Correct!';
+      } else {
+        btn.classList.add('wrong');
+        opts.querySelectorAll('.quiz-opt')[q.answer].classList.add('correct');
+        document.getElementById('quiz-feedback').textContent = '✗ Not quite — see the highlighted answer.';
+      }
+      document.getElementById('quiz-score').textContent = `${score} / ${total}`;
+    });
+    opts.appendChild(btn);
+  });
+  answered = false;
+}
+
+document.getElementById('quiz-next').addEventListener('click', () => {
+  qIndex++;
+  if (qIndex >= shuffled.length) {
+    showResult();
+  } else {
+    renderQuiz();
+  }
+});
+
+function showResult() {
+  const total = shuffled.length;
+  const pct = Math.round((score / total) * 100);
+  const msg = pct >= 80 ? 'Great work — you know this cold.' : pct >= 60 ? 'Solid effort — review the ones you missed.' : 'Keep studying — you\'ll get there.';
+  document.querySelector('.quiz-wrap').innerHTML = `
+    <div class="quiz-result">
+      <div class="big">${score}<em>/${total}</em></div>
+      <p>${msg}</p>
+      <button class="quiz-btn" onclick="restartQuiz()">Try again →</button>
+    </div>
+  `;
+}
+
+function restartQuiz() {
+  qIndex = 0; score = 0; answered = false;
+  shuffled.sort(() => Math.random() - 0.5);
+  const wrap = document.querySelector('.quiz-wrap');
+  wrap.innerHTML = `
+    <div class="quiz-progress" id="quiz-progress"></div>
+    <div class="quiz-q"    id="quiz-q"></div>
+    <div class="quiz-opts" id="quiz-opts"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+    <div class="quiz-footer">
+      <button class="quiz-btn" id="quiz-next">Next →</button>
+      <div class="quiz-score" id="quiz-score"></div>
+    </div>
+  `;
+  document.getElementById('quiz-next').addEventListener('click', () => {
+    qIndex++;
+    if (qIndex >= shuffled.length) showResult(); else renderQuiz();
+  });
+  renderQuiz();
+}
+
+renderQuiz();
+
+/* ══════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════ */
+document.querySelectorAll('.nav-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
