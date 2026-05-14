@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cold War Study Guide</title>
+<title>Modern World History Study Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -59,7 +59,6 @@
     min-height: 100vh;
   }
 
-  /* ── Layout ── */
   .page-wrap {
     max-width: 860px;
     margin: 0 auto;
@@ -79,7 +78,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--red) 0%, var(--red-dark) 50%, #1a1a18 100%);
+    background: linear-gradient(90deg, var(--red) 0%, var(--blue) 40%, var(--gold) 70%, #1a1a18 100%);
   }
 
   .header-eyebrow {
@@ -118,7 +117,39 @@
 
   .header-meta span::before { content: '▸ '; color: var(--red); }
 
-  /* ── Nav tabs ── */
+  /* ── Unit nav ── */
+  .unit-nav {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .unit-tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.625rem 1rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.15s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .unit-tab:hover { color: var(--text); }
+  .unit-tab.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+    font-weight: 500;
+  }
+
+  /* ── Feature tabs (Terms / Timeline / Quiz) ── */
   .nav-tabs {
     display: flex;
     gap: 0.25rem;
@@ -137,14 +168,12 @@
     background: none;
     color: var(--text-secondary);
     cursor: pointer;
-    position: relative;
     transition: color 0.15s;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
   }
 
   .nav-tab:hover { color: var(--text); }
-
   .nav-tab.active {
     color: var(--red);
     border-bottom-color: var(--red);
@@ -210,6 +239,7 @@
     font-weight: 500;
     color: var(--text);
     line-height: 1.3;
+    flex: 1;
   }
 
   .term-badge {
@@ -229,6 +259,9 @@
   .badge-event    { background: var(--green-light);  color: var(--green); }
   .badge-place    { background: #F1EFE8;             color: #444441; }
   .badge-tactic   { background: var(--purple-light); color: var(--purple); }
+  .badge-battle   { background: var(--red-light);    color: var(--red-dark); }
+  .badge-treaty   { background: var(--gold-light);   color: #633806; }
+  .badge-ideology { background: var(--purple-light); color: var(--purple); }
 
   .toggle {
     font-size: 16px;
@@ -273,9 +306,10 @@
     outline: 2px solid var(--bg);
     border: 1.5px solid var(--red);
   }
-  .tl-dot.blue  { background: var(--blue);  border-color: var(--blue); }
-  .tl-dot.gold  { background: var(--gold);  border-color: var(--gold); }
-  .tl-dot.green { background: var(--green); border-color: var(--green); }
+  .tl-dot.blue  { background: var(--blue);   border-color: var(--blue); }
+  .tl-dot.gold  { background: var(--gold);   border-color: var(--gold); }
+  .tl-dot.green { background: var(--green);  border-color: var(--green); }
+  .tl-dot.purple{ background: var(--purple); border-color: var(--purple); }
 
   .tl-year {
     font-family: 'IBM Plex Mono', monospace;
@@ -285,9 +319,10 @@
     color: var(--red);
     margin-bottom: 2px;
   }
-  .tl-year.blue  { color: var(--blue); }
-  .tl-year.gold  { color: var(--gold); }
-  .tl-year.green { color: var(--green); }
+  .tl-year.blue   { color: var(--blue); }
+  .tl-year.gold   { color: var(--gold); }
+  .tl-year.green  { color: var(--green); }
+  .tl-year.purple { color: var(--purple); }
 
   .tl-title { font-size: 14px; font-weight: 500; color: var(--text); }
   .tl-note  { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-top: 3px; }
@@ -463,76 +498,58 @@
 </style>
 </head>
 <body>
-
 <div class="page-wrap">
 
-  <!-- Header -->
   <header class="site-header">
     <div class="header-eyebrow">Study Guide</div>
-    <h1>The <em>Cold War</em><br>&amp; Communist Era</h1>
+    <h1>Modern <em>World History</em><br>Key Terms</h1>
     <div class="header-meta">
-      <span>42 key terms</span>
+      <span>5 units</span>
       <span>Interactive flashcards</span>
       <span>Practice quiz</span>
       <span>Key timeline</span>
     </div>
   </header>
 
-  <!-- Nav -->
-  <nav class="nav-tabs" role="tablist">
-    <button class="nav-tab active" data-tab="terms"   role="tab">All Terms</button>
+  <!-- Unit selector -->
+  <nav class="unit-nav" role="tablist" aria-label="Select unit">
+    <button class="unit-tab active" data-unit="wwi"      role="tab">WWI</button>
+    <button class="unit-tab"        data-unit="interwar" role="tab">Interwar &amp; Fascism</button>
+    <button class="unit-tab"        data-unit="wwii"     role="tab">WWII</button>
+    <button class="unit-tab"        data-unit="comm"     role="tab">Communism</button>
+    <button class="unit-tab"        data-unit="cold"     role="tab">Cold War</button>
+  </nav>
+
+  <!-- Feature tabs -->
+  <nav class="nav-tabs" role="tablist" aria-label="View mode">
+    <button class="nav-tab active" data-tab="terms"    role="tab">All Terms</button>
     <button class="nav-tab"        data-tab="timeline" role="tab">Timeline</button>
     <button class="nav-tab"        data-tab="quiz"     role="tab">Quiz</button>
   </nav>
 
-  <!-- ══════════ TAB: TERMS ══════════ -->
+  <!-- ══ TAB: TERMS ══ -->
   <section class="tab-section active" id="tab-terms">
-
     <div class="search-wrap">
       <span class="search-icon">&#128269;</span>
       <input class="search-input" type="search" id="term-search" placeholder="Search terms…" aria-label="Search terms">
     </div>
     <div class="no-results" id="no-results">No terms match your search.</div>
-
-    <div class="section-block">
-      <div class="section-label">Ideologies &amp; Systems</div>
-      <div class="term-grid" id="grid-ideology"></div>
-    </div>
-
-    <div class="section-block">
-      <div class="section-label">Key Figures</div>
-      <div class="term-grid" id="grid-people"></div>
-    </div>
-
-    <div class="section-block">
-      <div class="section-label">Policies &amp; Doctrines</div>
-      <div class="term-grid" id="grid-policy"></div>
-    </div>
-
-    <div class="section-block">
-      <div class="section-label">Tactics &amp; Methods</div>
-      <div class="term-grid" id="grid-tactics"></div>
-    </div>
-
-    <div class="section-block">
-      <div class="section-label">Events &amp; Places</div>
-      <div class="term-grid" id="grid-events"></div>
-    </div>
-
+    <div id="terms-container"></div>
   </section>
 
-  <!-- ══════════ TAB: TIMELINE ══════════ -->
+  <!-- ══ TAB: TIMELINE ══ -->
   <section class="tab-section" id="tab-timeline">
     <div class="tl-legend">
-      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--red)"></div>Soviet / Communist</div>
-      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--blue)"></div>Western / US-led</div>
-      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--gold)"></div>Turning point</div>
-      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--green)"></div>Dissolution</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--red)"></div>War / Conflict</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--blue)"></div>Western / Allied</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--gold)"></div>Turning Point</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--green)"></div>Treaty / Peace</div>
+      <div class="tl-legend-item"><div class="tl-legend-dot" style="background:var(--purple)"></div>Revolution / Rise</div>
     </div>
     <div class="timeline" id="timeline"></div>
   </section>
 
-  <!-- ══════════ TAB: QUIZ ══════════ -->
+  <!-- ══ TAB: QUIZ ══ -->
   <section class="tab-section" id="tab-quiz">
     <div class="quiz-wrap">
       <div class="quiz-progress" id="quiz-progress"></div>
@@ -553,148 +570,439 @@
   </div>
 
   <footer class="site-footer">
-    Cold War &amp; Communist Era Study Guide · click cards to reveal definitions
+    Modern World History Study Guide &middot; click cards to reveal definitions
   </footer>
 
-</div><!-- /page-wrap -->
+</div>
 
 <script>
 /* ══════════════════════════════════════
-   DATA
+   UNIT DATA
 ══════════════════════════════════════ */
-const TERMS = {
-  ideology: [
-    { name:"Communism vs Capitalism", badge:"concept",
-      def:"The central ideological battle of the Cold War. Communism advocated collective ownership of property and a classless society (championed by the USSR), while capitalism defended private ownership, free markets, and individual economic freedom (championed by the USA)." },
-    { name:"Containment", badge:"policy",
-      def:"The US foreign policy strategy, articulated by diplomat George Kennan, aimed at preventing the further spread of Soviet communism. The idea was to 'contain' it where it already existed and stop the domino effect of nations falling to communist rule." },
-    { name:"Nationalism", badge:"concept",
-      def:"Strong loyalty to one's own nation, often as a force resisting foreign domination. In the Cold War, nationalist movements sometimes aligned with communism (Vietnam, China) or opposed Soviet control (Eastern European uprisings)." },
-    { name:"Propaganda", badge:"tactic",
-      def:"Biased information used by both superpowers to shape public opinion at home and abroad. The US used Radio Free Europe; the USSR controlled all state media. Both sides portrayed the enemy as threatening and immoral." },
-    { name:"Censorship", badge:"tactic",
-      def:"In Soviet-aligned states, the government controlled all media, art, and information. Citizens had no access to foreign news, and intellectuals who challenged the regime were silenced, imprisoned, or sent to gulags." },
-    { name:"Red Scare", badge:"concept",
-      def:"Periods of intense anti-communist fear in the USA — notably the 1950s McCarthyism era. Americans suspected of communist sympathies were investigated, blacklisted, or imprisoned, often with little or no evidence." },
-  ],
-  people: [
-    { name:"Vladimir Lenin", badge:"person",
-      def:"Leader of the 1917 Bolshevik Revolution that overthrew the Russian tsar. Founded the Soviet state and developed Marxism-Leninism — the idea that a vanguard party should lead the revolution on behalf of the working class. Died 1924." },
-    { name:"Josef Stalin", badge:"person",
-      def:"Soviet dictator (1924–1953) who industrialized the USSR through forced collectivization, orchestrated the Great Purge to eliminate political rivals, and built the Gulag prison camp network. Allied with the West in WWII but dominated Eastern Europe afterward." },
-    { name:"Mao Zedong", badge:"person",
-      def:"Leader of the Chinese Communist Party who won the Chinese Civil War in 1949 and founded the People's Republic of China. Launched the disastrous Great Leap Forward and Cultural Revolution, resulting in tens of millions of deaths." },
-    { name:"Chiang Kai-Shek", badge:"person",
-      def:"Nationalist leader of China and head of the Kuomintang (KMT) party. Lost the Chinese Civil War to Mao Zedong in 1949 and retreated to Taiwan, where he established the Republic of China government." },
-    { name:"Sun Yat-Sen", badge:"person",
-      def:"Chinese revolutionary and first president of the Republic of China (1912). Called the 'Father of the Nation' in both mainland China and Taiwan. Founded the Nationalist Party (Kuomintang) and advocated his Three Principles of the People." },
-    { name:"Ho Chi Minh", badge:"person",
-      def:"Vietnamese communist revolutionary and leader of North Vietnam. Led the Viet Minh independence movement against French colonialism and later directed the fight against South Vietnam and the USA in the Vietnam War." },
-    { name:"Nicolae Ceaușescu", badge:"person",
-      def:"Communist dictator of Romania (1965–1989), notorious for a brutal, isolationist regime and cult of personality. His government impoverished citizens and executed dissidents. He was overthrown and executed by firing squad in December 1989." },
-    { name:"Mikhail Gorbachev", badge:"person",
-      def:"Final leader of the Soviet Union (1985–1991). Introduced glasnost (openness) and perestroika (restructuring) to reform the USSR, but these policies inadvertently accelerated the collapse of Soviet power across Eastern Europe and ultimately the USSR itself." },
-    { name:"Ronald Reagan", badge:"person",
-      def:"US President (1981–1989) who escalated pressure on the Soviet Union through the Reagan Doctrine — supporting anti-communist insurgencies worldwide and massively increasing military spending, contributing to Soviet economic strain and eventual collapse." },
-  ],
-  policy: [
-    { name:"Truman Doctrine", badge:"policy",
-      def:"1947 policy by President Truman pledging US military and economic support to any nation threatened by communist takeover. First applied to Greece and Turkey; it established the USA's commitment to containment on a global scale." },
-    { name:"Marshall Plan", badge:"policy",
-      def:"1948 US program providing over $13 billion in economic aid to rebuild war-devastated Western European economies. Aimed to prevent poverty-stricken nations from turning to communism. The USSR rejected it and forbade satellite states from accepting it." },
-    { name:"Glasnost and Perestroika", badge:"policy",
-      def:"Gorbachev's twin reforms: glasnost (openness) loosened censorship and allowed political debate; perestroika (restructuring) decentralized the Soviet economy. Both policies, intended to save the USSR, instead hastened its disintegration." },
-    { name:"Collectivization", badge:"policy",
-      def:"Soviet policy forcibly merging private farms into state-run collective farms (kolkhozy). Peasants who resisted were deported or killed. Collectivization reduced agricultural output dramatically, contributing to devastating famines including the Holodomor." },
-    { name:"Dekulakization", badge:"policy",
-      def:"Stalin's campaign (1930–31) to destroy the kulak class — prosperous peasant farmers seen as class enemies. Kulaks were arrested, executed, or deported to gulags. An estimated 1.8 million were deported in 1930–31 alone." },
-    { name:"Economic Aid", badge:"policy",
-      def:"Both superpowers used economic assistance as a Cold War tool — the USA through the Marshall Plan and foreign aid, the USSR by subsidizing allied governments. Aid came with political strings, deepening client states' dependence on their patron." },
-    { name:"Military Alliances", badge:"policy",
-      def:"Formal defense pacts divided the world into blocs: NATO (1949) aligned Western democracies under US leadership; the Warsaw Pact (1955) bound Eastern European states to the USSR. An attack on one member obligated all others to respond." },
-  ],
-  tactics: [
-    { name:"Proxy Wars", badge:"tactic",
-      def:"Conflicts where the US and USSR supported opposing sides without fighting each other directly — avoiding nuclear escalation while advancing their interests. Korea, Vietnam, Angola, and Afghanistan were all proxy battlegrounds of the Cold War." },
-    { name:"Arms Race", badge:"tactic",
-      def:"The escalating competition between the USA and USSR to develop more powerful nuclear weapons and delivery systems. Both sides built enough weapons to destroy the world many times over, underpinned by Mutually Assured Destruction (MAD)." },
-    { name:"Nuclear Weapons", badge:"tactic",
-      def:"Atomic and hydrogen bombs became the defining weapons of the Cold War. The USA used them on Japan in 1945; the USSR tested its first bomb in 1949. Their existence created a balance of terror that paradoxically prevented direct superpower conflict." },
-    { name:"Blockades", badge:"tactic",
-      def:"The Soviet Union blockaded West Berlin in 1948–49, cutting off road and rail supply routes to force the Western powers to abandon the city. The Western response — the Berlin Airlift — thwarted the blockade without military confrontation." },
-    { name:"Airlifts", badge:"tactic",
-      def:"The Berlin Airlift (1948–49) saw Western powers fly over 200,000 flights to supply West Berlin during the Soviet blockade. It was a propaganda triumph showing Western resolve and commitment to defending democratic outposts behind the Iron Curtain." },
-    { name:"Guerrilla Warfare", badge:"tactic",
-      def:"Irregular combat tactics used by weaker forces against conventional armies — hit-and-run attacks, ambushes, and blending into civilian populations. Used extensively by communist insurgencies in Vietnam, China, Cuba, and many other Cold War conflicts." },
-    { name:"Psychological Warfare", badge:"tactic",
-      def:"Efforts to influence the morale, beliefs, and behavior of enemy populations and soldiers. Both sides used broadcasts, leaflets, and cultural programs. The CIA funded covert cultural projects; the USSR beamed propaganda into Western countries." },
-  ],
-  events: [
-    { name:"Vietnam War", badge:"event",
-      def:"(1955–1975) A Cold War proxy conflict in which North Vietnam (communist, backed by China and the USSR) fought South Vietnam (backed by the USA). After years of costly fighting, US forces withdrew in 1973; South Vietnam fell in 1975." },
-    { name:"Korean War", badge:"event",
-      def:"(1950–1953) North Korea (backed by China and the USSR) invaded South Korea, prompting a US-led UN intervention. The war ended in an armistice at roughly the original border, leaving a divided peninsula and technically a war never formally ended." },
-    { name:"Great Purge", badge:"event",
-      def:"Stalin's campaign of political repression (1936–1938) in which hundreds of thousands of Soviet citizens — including most senior military officers and Communist Party rivals — were executed or sent to gulags on fabricated charges of treason." },
-    { name:"Gulag", badge:"place",
-      def:"The Soviet network of forced labor camps where political prisoners, criminals, and 'class enemies' were sent. At its peak, millions were imprisoned in brutal conditions across Siberia and Central Asia. The gulag became a symbol of communist repression." },
-    { name:"Holodomor", badge:"event",
-      def:"The Soviet-engineered famine (1932–33) in Ukraine, caused by Stalin's forced collectivization and grain quotas. An estimated 3.5–7.5 million Ukrainians died of starvation. Ukraine and many countries now recognize it as a genocide." },
-    { name:"Berlin Wall", badge:"place",
-      def:"Built by East Germany in 1961 to stop the mass exodus of citizens to West Berlin. It physically divided the city until 1989 when it fell following mass protests. The Wall became the defining symbol of the Iron Curtain and communist repression." },
-    { name:"Great Leap Forward", badge:"event",
-      def:"Mao's disastrous economic campaign (1958–1962) to rapidly transform China into a communist industrial society. Collectivization and unrealistic steel quotas caused one of history's worst famines, killing an estimated 15–55 million people." },
-    { name:"Iron Curtain", badge:"concept",
-      def:"Winston Churchill's 1946 term for the ideological and physical boundary dividing communist Eastern Europe from democratic Western Europe. It symbolized the division of the continent — East under Soviet domination, West aligned with the USA." },
-    { name:"Baltic States", badge:"place",
-      def:"Estonia, Latvia, and Lithuania — small nations on the Baltic Sea forcibly incorporated into the Soviet Union in 1940. They were among the first Soviet republics to declare independence as the USSR weakened, formally regaining it in 1991." },
-    { name:"Eastern Bloc", badge:"place",
-      def:"The group of Soviet-dominated communist states in Central and Eastern Europe, including Poland, East Germany, Czechoslovakia, Hungary, Romania, Bulgaria, and Albania. They were satellite states controlled by Moscow through economic and military pressure." },
-    { name:"Satellite States", badge:"place",
-      def:"Countries nominally independent but effectively controlled by the Soviet Union — including Poland, Hungary, Czechoslovakia, East Germany, Romania, and Bulgaria. They had communist governments installed or backed by Moscow and could not pursue independent foreign policies." },
-    { name:"CCP", badge:"place",
-      def:"The Chinese Communist Party, founded in 1921. Under Mao Zedong, the CCP won the Chinese Civil War and has governed mainland China since 1949. It remains the sole ruling party of the People's Republic of China today." },
-    { name:"North Korea", badge:"place",
-      def:"Established in 1948 under Soviet-backed Kim Il-Sung after the division of Korea. Launched the Korean War in 1950. Has been ruled by the Kim family dynasty ever since, maintaining an extreme form of communist totalitarianism and nuclear weapons program." },
-  ],
+const UNITS = {
+
+  wwi: {
+    label: "World War I",
+    sections: [
+      {
+        title: "Causes & Context",
+        terms: [
+          { name:"MAINE", badge:"concept", def:"The acronym for the five main causes of World War I: Militarism (nations building massive armies and navies), Alliances (the web of defense agreements that pulled nations into war), Imperialism (competition for global colonies), Nationalism (intense loyalty to one's nation or ethnic group), and Entangling Alliances (binding treaties that made a local conflict explode into a world war)." },
+          { name:"Militarism", badge:"concept", def:"The policy of maintaining strong military forces and glorifying military power. In pre-WWI Europe, major powers — especially Germany and Britain — engaged in an arms race, building massive armies and navies that made war more likely and more destructive." },
+          { name:"Alliances", badge:"policy", def:"Europe was divided into two main alliance blocs: the Triple Alliance (Germany, Austria-Hungary, Italy) and the Triple Entente (France, Russia, Britain). These interlocking agreements meant a local dispute could rapidly escalate into a continental — then world — war." },
+          { name:"Imperialism", badge:"concept", def:"European powers competed fiercely for colonies and global influence. This rivalry created tensions and grievances that contributed to the outbreak of war, particularly among the Great Powers seeking resources and prestige." },
+          { name:"Nationalism", badge:"concept", def:"Strong devotion to one's nation or ethnic group. In the Balkans, Slavic nationalism challenged Austro-Hungarian rule and contributed directly to the assassination of Archduke Franz Ferdinand. Nationalism both caused the war and sustained soldiers' willingness to fight." },
+          { name:"Assassination of Archduke Franz Ferdinand", badge:"event", def:"On June 28, 1914, Austro-Hungarian heir Archduke Franz Ferdinand was shot in Sarajevo, Bosnia, by Gavrilo Princip, a Bosnian Serb nationalist. This triggered the alliance chain reaction that launched World War I within six weeks." },
+          { name:"Central Powers", badge:"concept", def:"The alliance fighting against the Entente/Allies in WWI, led by Germany and Austria-Hungary, joined by the Ottoman Empire and Bulgaria. They fought on multiple fronts until Germany's collapse in November 1918." },
+          { name:"Allies", badge:"concept", def:"The coalition opposing the Central Powers, originally France, Russia, and Britain (the Triple Entente), later joined by Italy (1915), the USA (1917), and others. Their combined resources ultimately overwhelmed Germany and its partners." },
+          { name:"Industrial Revolution", badge:"concept", def:"The preceding century of industrialization gave WWI nations the capacity to produce weapons, ammunition, and military equipment at unprecedented scale, making the war longer and deadlier than any previous conflict." },
+        ]
+      },
+      {
+        title: "Warfare & Technology",
+        terms: [
+          { name:"Trench Warfare", badge:"tactic", def:"The defining feature of the Western Front. Both sides dug hundreds of miles of parallel trenches, creating a stalemate where neither could advance without catastrophic casualties. Soldiers lived in mud and filth, enduring artillery barrages and poison gas attacks." },
+          { name:"Total War", badge:"concept", def:"A conflict in which entire nations — not just armies — are mobilized for war. Governments controlled economies, rationed food, censored press, and directed civilian labor. WWI was the first true total war, blurring the line between soldier and civilian." },
+          { name:"Submarine Warfare", badge:"tactic", def:"Germany's U-boats (submarines) attempted to blockade Britain by sinking any ship in British waters, including neutral and civilian vessels. The sinking of the Lusitania (1915) killed 1,198 people and inflamed American opinion against Germany." },
+          { name:"Poison Gas", badge:"tactic", def:"First used by Germany in 1915 at Ypres, chemical weapons (chlorine, mustard gas) caused horrific casualties and became a symbol of WWI's industrial brutality. Both sides used gas, causing blindness, lung damage, and death." },
+          { name:"New Technology (Tanks, Submarines, Poison Gas)", badge:"tactic", def:"WWI introduced or massively expanded deadly technologies: tanks broke through trench lines, submarines attacked shipping, poison gas terrorized troops, aircraft conducted reconnaissance and combat, and artillery barrages killed millions. Technology made the war uniquely catastrophic." },
+          { name:"Eastern & Western Fronts", badge:"place", def:"WWI was fought on two main fronts: the Western Front (France/Belgium) — a static trench stalemate — and the more fluid Eastern Front (Russia vs. Germany/Austria-Hungary). Russia's collapse in 1917 freed German troops to make a final failed push in the West." },
+          { name:"Battle of Gallipoli", badge:"battle", def:"(1915–16) A failed Allied campaign to capture the Ottoman-controlled Dardanelles strait and open a supply route to Russia. Planned by Winston Churchill, it resulted in over 250,000 Allied casualties and became a defining trauma for Australia and New Zealand." },
+          { name:"Winston Churchill", badge:"person", def:"British statesman who served as First Lord of the Admiralty during WWI, masterminding — and taking blame for — the disastrous Gallipoli campaign. He learned from WWI's failures and would lead Britain through WWII as Prime Minister." },
+        ]
+      },
+      {
+        title: "Key Turning Points",
+        terms: [
+          { name:"Zimmerman Telegram", badge:"event", def:"A secret 1917 diplomatic cable from Germany to Mexico, proposing a military alliance in exchange for Germany's help recapturing Texas, New Mexico, and Arizona from the USA. When Britain intercepted and published it, it outraged Americans and accelerated US entry into the war." },
+          { name:"Propaganda", badge:"tactic", def:"Governments on all sides used posters, films, and newspapers to rally support, demonize the enemy, and suppress dissent. Britain used propaganda to sway neutral nations (including the USA); Germany countered with its own messaging. It was the first war fought as much with words as weapons." },
+          { name:"Russian Revolution — February 1917", badge:"event", def:"Bread riots and military mutinies toppled Tsar Nicholas II, ending centuries of Romanov rule. A Provisional Government took power and initially continued the war — a fateful decision that left the door open for the Bolsheviks." },
+          { name:"Russian Revolution — October 1917 (Bolsheviks / Lenin)", badge:"event", def:"Vladimir Lenin's Bolshevik Party seized power in a coup, promising 'Peace, Land, Bread.' They immediately negotiated an armistice with Germany, removing Russia from WWI and allowing Germany to shift massive forces westward for a final offensive." },
+          { name:"Treaty of Brest-Litovsk", badge:"treaty", def:"March 1918 peace treaty between Soviet Russia and the Central Powers, ending Russian participation in WWI. Russia surrendered vast territories (Poland, Finland, Baltic states, Ukraine). It showed the Bolsheviks' desperate desire for peace at almost any price." },
+        ]
+      },
+      {
+        title: "Peace & Aftermath",
+        terms: [
+          { name:"End of War — 11/11/1918", badge:"event", def:"At 11 a.m. on November 11, 1918, an armistice took effect, ending WWI. Germany, facing internal revolution and military collapse, agreed to Allied ceasefire terms. The date is still commemorated as Remembrance Day / Veterans Day." },
+          { name:"Armistice", badge:"event", def:"A formal agreement to stop fighting — not technically a surrender but a ceasefire. The Armistice of November 11, 1918 ended WWI combat. Germany agreed to withdraw its forces and disarm, but kept hope of a fair peace — hopes soon dashed by the Treaty of Versailles." },
+          { name:"Paris Peace Conference", badge:"event", def:"The 1919 conference at Versailles where Allied powers negotiated the post-WWI settlement. Dominated by the 'Big Four' (USA, Britain, France, Italy), it produced five treaties, most notably the Treaty of Versailles with Germany. Defeated powers had no voice." },
+          { name:"Wilson's 14 Points", badge:"policy", def:"US President Woodrow Wilson's idealistic blueprint for post-war peace, presented to Congress in January 1918. Key points included freedom of the seas, national self-determination, open diplomacy, and a League of Nations. Many were ignored or watered down at Paris." },
+          { name:"Treaty of Versailles", badge:"treaty", def:"The 1919 peace treaty ending WWI with Germany. It forced Germany to accept sole blame (the 'War Guilt Clause'), pay massive reparations, surrender territory, and drastically limit its military. Most historians agree its harshness helped fuel the resentments that led to WWII." },
+          { name:"League of Nations", badge:"policy", def:"Woodrow Wilson's proposed international organization to maintain world peace through collective security and arbitration. It was created in 1920 but fatally weakened when the US Senate refused to join. Without America, it lacked the power to prevent WWII." },
+          { name:"Armenian Genocide", badge:"event", def:"The systematic mass murder and deportation of the Armenian Christian minority by the Ottoman Empire (1915–1923), killing an estimated 600,000 to 1.5 million people. It is widely recognized as the 20th century's first genocide, though Turkey still disputes the term." },
+        ]
+      }
+    ],
+    timeline: [
+      { year:"June 28, 1914", title:"Assassination of Archduke Franz Ferdinand", note:"The spark that ignited WWI — Gavrilo Princip shoots the Austro-Hungarian heir in Sarajevo.", color:"red" },
+      { year:"Aug 1914", title:"WWI begins", note:"Alliance chain reaction: Austria-Hungary declares war on Serbia; Germany, Russia, France, Britain enter within days.", color:"red" },
+      { year:"1915", title:"Gallipoli & poison gas", note:"Failed Allied campaign at Gallipoli; Germany first uses chlorine gas at Ypres.", color:"red" },
+      { year:"1915", title:"Sinking of the Lusitania", note:"German U-boat sinks British passenger ship, killing 1,198 including 128 Americans.", color:"red" },
+      { year:"Feb 1917", title:"Russian Revolution (February)", note:"Tsar Nicholas II abdicates; Provisional Government takes power and continues the war.", color:"purple" },
+      { year:"Apr 1917", title:"USA enters WWI", note:"Zimmerman Telegram and unrestricted submarine warfare push America into the conflict.", color:"blue" },
+      { year:"Oct 1917", title:"Bolshevik Revolution", note:"Lenin's Bolsheviks seize power in Russia, promising to end the war.", color:"purple" },
+      { year:"Mar 1918", title:"Treaty of Brest-Litovsk", note:"Russia exits WWI, surrendering vast territories to Germany.", color:"green" },
+      { year:"Nov 11, 1918", title:"Armistice — WWI ends", note:"Fighting stops at 11 a.m. on the 11th day of the 11th month.", color:"gold" },
+      { year:"1919", title:"Paris Peace Conference & Treaty of Versailles", note:"Allied victors impose harsh terms on Germany, sowing seeds of future conflict.", color:"green" },
+    ],
+    quiz: [
+      { q:"What does the 'M' in the WWI acronym MAINE stand for?", opts:["Monarchy","Militarism","Mobilization","Migration"], answer:1 },
+      { q:"The assassination that triggered WWI targeted which Austro-Hungarian figure?", opts:["Kaiser Wilhelm II","Archduke Franz Ferdinand","Emperor Franz Joseph","General von Hindenburg"], answer:1 },
+      { q:"The Zimmerman Telegram proposed an alliance between Germany and which country?", opts:["Japan","Canada","Mexico","Austria"], answer:2 },
+      { q:"What was the defining military feature of the Western Front?", opts:["Tank warfare","Naval blockades","Trench warfare","Aerial bombing"], answer:2 },
+      { q:"Wilson's 14 Points called for the creation of which organization?", opts:["United Nations","League of Nations","NATO","World Court"], answer:1 },
+      { q:"The Treaty of Brest-Litovsk ended which country's involvement in WWI?", opts:["France","Ottoman Empire","Russia","Austria-Hungary"], answer:2 },
+      { q:"The Armenian Genocide was carried out by which empire?", opts:["Russian","German","Austro-Hungarian","Ottoman"], answer:3 },
+      { q:"WWI officially ended on which date?", opts:["September 1, 1918","October 30, 1918","November 11, 1918","December 25, 1918"], answer:2 },
+    ]
+  },
+
+  interwar: {
+    label: "Interwar Years, Fascism & the Holocaust",
+    sections: [
+      {
+        title: "Post-WWI Settlement",
+        terms: [
+          { name:"League of Nations (LON)", badge:"policy", def:"An intergovernmental organization founded in 1920 after WWI to maintain world peace. Fatally weakened by the US refusal to join and by its inability to enforce decisions militarily. It failed to stop Japanese aggression in Manchuria (1931) or Italian invasion of Ethiopia (1935)." },
+          { name:"Big 3", badge:"person", def:"The three dominant Allied leaders at the 1919 Paris Peace Conference: US President Woodrow Wilson (idealism, 14 Points), British PM David Lloyd George (public pressure for harsh terms), and French PM Georges Clemenceau (revenge and security above all). Italy's Orlando was often sidelined despite Allied status." },
+          { name:"Paris Peace Conference", badge:"event", def:"The 1919 negotiations at Versailles that produced the post-WWI peace settlement. Defeated nations — Germany, Austria-Hungary, Ottoman Empire — had no voice. The resulting treaties redrew the map of Europe and the Middle East, often along ethnic lines but also creating new grievances." },
+          { name:"Treaty of Versailles", badge:"treaty", def:"The 1919 peace treaty with Germany. It imposed the 'War Guilt Clause' (Article 231) blaming Germany for the war, mandated reparations of 132 billion gold marks, stripped Germany of 13% of its territory and 10% of its population, and severely limited the German military." },
+          { name:"Lost Generation", badge:"concept", def:"The generation of young men killed or psychologically shattered by WWI. The term (associated with writers like Hemingway and Fitzgerald) captures the disillusionment that followed — a sense that old values of duty and honor had led only to industrial slaughter." },
+          { name:"Reparations", badge:"policy", def:"Financial penalties imposed on Germany by the Treaty of Versailles to compensate Allied nations for war damages. Set at 132 billion gold marks (equivalent to hundreds of billions today), they caused hyperinflation and economic chaos in 1920s Germany, fueling resentment." },
+          { name:"Dawes Plan", badge:"policy", def:"A 1924 US-backed agreement that restructured Germany's reparations payments and provided American loans to stabilize the German economy. It temporarily eased the crisis but tied Germany's recovery to US capital — which evaporated in the 1929 crash." },
+          { name:"Great Depression", badge:"event", def:"The global economic catastrophe beginning with the 1929 Wall Street Crash. Mass unemployment (25%+ in the US and Germany), bank failures, and collapsing trade devastated living standards worldwide. Economic despair made populations receptive to extremist political movements, including fascism." },
+        ]
+      },
+      {
+        title: "Rise of Fascism",
+        terms: [
+          { name:"Core Beliefs of Fascism", badge:"ideology", def:"Fascism combines extreme nationalism, authoritarianism, and totalitarianism. Key tenets include: the state above all individual rights, a single all-powerful leader, suppression of opposition, glorification of violence and war, racial hierarchy and Social Darwinism (survival of the 'fittest' race), and expansionist foreign policy." },
+          { name:"Political Spectrum (Left/Right)", badge:"concept", def:"A framework for categorizing political ideologies: the left favors equality, collective ownership, and social change; the right favors tradition, hierarchy, and private property. Fascism sits at the extreme right — using populist language but serving nationalist and authoritarian ends." },
+          { name:"Hitler", badge:"person", def:"Adolf Hitler (1889–1945), Austrian-born leader of the Nazi Party and dictator of Germany (Führer) from 1933. His ideology of racial hierarchy, antisemitism, and German expansion drove WWII and the Holocaust. He died by suicide in Berlin as Soviet forces closed in on April 30, 1945." },
+          { name:"Mussolini (Benito Mussolini)", badge:"person", def:"Italian fascist dictator (Il Duce) who founded the fascist movement and ruled Italy (1922–1943). His March on Rome in 1922 brought him to power with King Victor Emmanuel III's approval. An ally of Hitler, he was captured by Italian partisans and executed in 1945." },
+          { name:"Il Duce", badge:"concept", def:"Italian for 'The Leader' — Mussolini's official title as fascist dictator of Italy. The use of such titles (alongside Hitler's 'Führer' and Stalin's 'Vozhd') reflected the cult of personality central to totalitarian regimes, presenting the leader as an infallible embodiment of the nation." },
+          { name:"Nazis", badge:"ideology", def:"The National Socialist German Workers' Party (NSDAP), founded 1920. Under Hitler, they combined extreme nationalism, antisemitism, anticommunism, and social Darwinism into a totalitarian ideology. The Nazis won power legally in 1933 then dismantled democracy to establish a one-party dictatorship." },
+          { name:"Blackshirts", badge:"tactic", def:"The paramilitary squadrons (Squadrismo) of Mussolini's Italian Fascist movement, named for their uniform. They used violence and intimidation against socialists, communists, and political opponents in the early 1920s, helping Mussolini seize power. They became the organizational backbone of Italian fascism." },
+          { name:"Brown Shirts", badge:"tactic", def:"The Sturmabteilung (SA) — the Nazi Party's original paramilitary force, named for their uniforms. They terrorized political opponents in the streets during the Weimar Republic era, helping Hitler rise to power. Hitler had SA leader Ernst Röhm killed in the Night of the Long Knives (1934)." },
+          { name:"Living Space (Lebensraum / Spazio Vitale)", badge:"ideology", def:"A core Nazi concept (also echoed in Italian fascism) holding that Germany needed additional territory — primarily in Eastern Europe — for its growing 'Aryan' population. This provided ideological justification for aggression against Poland, the USSR, and other nations." },
+          { name:"Scapegoat", badge:"concept", def:"Blaming a vulnerable group for a society's problems. Hitler scapegoated Jewish people for Germany's WWI defeat (the 'stab-in-the-back' myth), economic problems, and cultural decline. Scapegoating is a central propaganda technique that diverts anger from real causes onto targeted minorities." },
+          { name:"Fear Mongering", badge:"tactic", def:"Deliberately exaggerating threats to manipulate public opinion and justify extreme measures. Fascists used fear of communism, economic collapse, and national humiliation to win support and suppress opposition. Fear created demand for a 'strong leader' who promised to restore order." },
+          { name:"Propaganda", badge:"tactic", def:"Information — true, distorted, or false — used to promote a political agenda. Nazi propaganda minister Joseph Goebbels controlled all German media, using rallies, films, radio, and posters to build Hitler's cult of personality, spread antisemitism, and prepare Germany for war." },
+        ]
+      },
+      {
+        title: "Fascist Expansion & Appeasement",
+        terms: [
+          { name:"March on Rome", badge:"event", def:"October 1922: Mussolini's Blackshirts marched on Rome, threatening to seize power by force. Fearing civil war, King Victor Emmanuel III appointed Mussolini as Prime Minister rather than call the army's bluff. Mussolini then consolidated power and declared a fascist dictatorship." },
+          { name:"Reichstag Fire", badge:"event", def:"February 27, 1933: the German parliament building burned down. Hitler blamed communists (a Dutch anarchist was convicted) and used the crisis to push through the Reichstag Fire Decree, suspending civil liberties. It enabled the rapid dismantling of Weimar democracy." },
+          { name:"Enabling Act", badge:"policy", def:"March 1933: the German parliament (intimidated by SA troops) granted Hitler the power to enact laws without parliamentary approval for four years. It effectively made Hitler a legal dictator and marks the formal end of Weimar democracy." },
+          { name:"Vittoria Mutilata (Mutilated Victory)", badge:"concept", def:"Italian nationalists' term for their sense of betrayal after WWI — Italy had joined the Allies expecting large territorial gains but received far less than promised at Paris. This grievance was exploited by Mussolini to build support for fascism." },
+          { name:"Remilitarization of Rhineland", badge:"event", def:"March 1936: Hitler sent troops into the demilitarized Rhineland, violating the Treaty of Versailles and Locarno Treaties. France and Britain protested but did nothing. The success emboldened Hitler and showed Western powers would not enforce the peace settlement." },
+          { name:"Annexation of Austria (Anschluss) — 1938", badge:"event", def:"In March 1938, German troops entered Austria and incorporated it into the Third Reich. The union (Anschluss) was prohibited by the Treaty of Versailles but Britain and France again did not intervene. Most Austrians welcomed it with cheering crowds." },
+          { name:"Munich Conference / Munich Agreement", badge:"event", def:"September 1938: Britain, France, Italy, and Germany met in Munich. Britain's Neville Chamberlain and France's Daladier agreed to give Hitler the Sudetenland (Czech territory) in exchange for a promise of no further demands. Czechoslovakia was not invited. It became the defining example of failed appeasement." },
+          { name:"Appeasement", badge:"policy", def:"The British and French strategy of making concessions to Hitler's demands to avoid war. Driven by fear of another devastating conflict and sympathy for some German grievances. Munich (1938) is its symbol. Churchill condemned it: 'An appeaser is one who feeds a crocodile, hoping it will eat him last.'" },
+          { name:"Invasion of Manchuria", badge:"event", def:"September 1931: Japan's Kwantung Army seized Manchuria (northeastern China), creating the puppet state Manchukuo. China appealed to the League of Nations, which condemned Japan but took no action. Japan simply withdrew from the League — exposing its impotence." },
+          { name:"Sino-Japanese War", badge:"event", def:"(1937–1945) Japan's full-scale invasion of China, beginning with the Marco Polo Bridge Incident (July 1937). Japanese forces committed atrocities including the Rape of Nanjing. China fought a brutal war of survival until Japan's defeat in 1945 ended the conflict." },
+          { name:"German Invasion of Poland — Sept 1, 1939", badge:"event", def:"Germany launched a Blitzkrieg ('lightning war') invasion of Poland on September 1, 1939. Britain and France, bound by treaty to defend Poland, declared war on Germany two days later. This is the formal start of World War II in Europe." },
+        ]
+      },
+      {
+        title: "Indoctrination",
+        terms: [
+          { name:"Hitler Youth", badge:"tactic", def:"The Nazi youth organization (Hitler-Jugend) for boys aged 14–18, mandatory from 1936. Members were indoctrinated with Nazi ideology, physical fitness, and military training. By 1939 it had over 8 million members. Girls were channeled into the parallel League of German Girls." },
+          { name:"League of German Girls", badge:"tactic", def:"(Bund Deutscher Mädel / BDM) The female counterpart to the Hitler Youth for girls aged 14–18. Girls were trained in Nazi ideology, domestic skills, and physical fitness — preparing them to be 'ideal' German wives and mothers who would raise future soldiers for the Reich." },
+          { name:"Italianization", badge:"policy", def:"Mussolini's policy of forcibly assimilating ethnic minorities in Italian-controlled territories — suppressing their languages, names, and cultures and replacing them with Italian ones. Applied especially harshly to Slovenes, Croats, and Germans in regions Italy gained after WWI." },
+        ]
+      },
+      {
+        title: "The Holocaust",
+        terms: [
+          { name:"Antisemitism", badge:"ideology", def:"Prejudice, discrimination, and hatred directed at Jewish people. Central to Nazi ideology, antisemitism portrayed Jews as a racial enemy responsible for Germany's problems. It escalated from discrimination (Nuremberg Laws, 1935) to systematic mass murder (the Final Solution, 1941–45)." },
+          { name:"Aryans", badge:"ideology", def:"The Nazi pseudo-scientific racial category for the 'master race' — blonde, blue-eyed northern Europeans. In Nazi ideology, Aryans were superior to all other races and destined to rule Europe. This racial hierarchy underpinned the persecution and murder of Jews, Roma, disabled people, and others." },
+          { name:"Nuremberg Laws", badge:"policy", def:"September 1935 laws that stripped German Jews of citizenship, prohibited marriage or sexual relations between Jews and non-Jews, and defined who counted as Jewish. They formalized antisemitic discrimination in law and began the systematic exclusion of Jews from German society." },
+          { name:"Kristallnacht", badge:"event", def:"'Night of Broken Glass' — November 9–10, 1938. Nazi paramilitaries and mobs attacked Jewish businesses, synagogues, and homes across Germany and Austria, killing around 100 Jews, injuring thousands, and arresting 30,000. It marked a sharp escalation from discrimination to open violence." },
+          { name:"Dehumanization", badge:"tactic", def:"The process of denying the humanity of a targeted group — portraying them as vermin, disease, or subhuman. Nazi propaganda systematically dehumanized Jewish people, making mass murder psychologically easier for perpetrators and reducing resistance from bystanders." },
+          { name:"Ghettos", badge:"place", def:"Sealed-off urban areas where Nazis forced Jewish populations to live in overcrowded, deliberately lethal conditions. The Warsaw Ghetto held 400,000 people at its peak. Ghettos were used to concentrate Jewish populations before deportation to extermination camps." },
+          { name:"T4 Program", badge:"event", def:"The Nazi program (Aktion T4) that secretly murdered people with physical and mental disabilities — an estimated 200,000–300,000 people between 1939–1945. It served as a 'trial run' for the mass murder techniques (gas chambers, cremation) later used in the Holocaust." },
+          { name:"Final Solution", badge:"event", def:"(Endlösung) The Nazi regime's plan for the systematic murder of all Jews in Europe. Formalized at the Wannsee Conference (January 1942), it resulted in the industrialized killing of approximately 6 million Jews in death camps such as Auschwitz, Treblinka, and Sobibor." },
+          { name:"Concentration / Extermination Camps", badge:"place", def:"The Nazi camp system ranged from concentration camps (forced labor, starvation, brutality) to extermination camps (Vernichtungslager) built solely for mass murder. The six death camps — all in occupied Poland — used gas chambers to kill primarily Jews. Over 6 million Jews and millions of others perished." },
+          { name:"Auschwitz", badge:"place", def:"The largest Nazi concentration and extermination camp complex, in occupied Poland. An estimated 1.1 million people were killed here, approximately 90% of them Jewish. Auschwitz has become the defining symbol of the Holocaust's industrial scale of murder." },
+          { name:"Gestapo", badge:"tactic", def:"The Geheime Staatspolizei (Secret State Police) — the Nazi regime's feared political police. They monitored, arrested, tortured, and killed political opponents, Jews, and others. They operated with minimal legal oversight, embodying the lawless terror of the Nazi state." },
+          { name:"Nuremberg Trials", badge:"event", def:"(1945–46) International military tribunals held after WWII to prosecute Nazi leaders for war crimes, crimes against humanity, and crimes against peace. Twenty-four major Nazi leaders were tried; twelve were sentenced to death. The trials established international legal precedents for prosecuting genocide." },
+          { name:"Elie Wiesel", badge:"person", def:"Romanian-born Jewish writer and Holocaust survivor (1928–2016). His memoir Night describes his experiences in Auschwitz and Buchenwald. A Nobel Peace Prize laureate (1986), he dedicated his life to Holocaust remembrance and the fight against indifference to human suffering." },
+        ]
+      }
+    ],
+    timeline: [
+      { year:"1919", title:"Treaty of Versailles signed", note:"Germany forced to accept war guilt, pay reparations, and surrender territory — planting seeds of resentment.", color:"green" },
+      { year:"1922", title:"March on Rome — Mussolini seizes power", note:"Italy becomes the world's first fascist state under Il Duce.", color:"purple" },
+      { year:"1929", title:"Wall Street Crash / Great Depression begins", note:"Global economic collapse creates mass unemployment and political radicalization.", color:"red" },
+      { year:"1933", title:"Hitler becomes Chancellor of Germany", note:"Nazis exploit depression and fear to take power legally, then dismantle democracy.", color:"purple" },
+      { year:"1933", title:"Reichstag Fire & Enabling Act", note:"Hitler uses crisis to seize dictatorial powers and crush opposition.", color:"red" },
+      { year:"1935", title:"Nuremberg Laws", note:"Jews stripped of citizenship; racial discrimination enshrined in German law.", color:"red" },
+      { year:"1936", title:"Remilitarization of Rhineland", note:"Hitler breaks Versailles terms; Britain and France do nothing.", color:"red" },
+      { year:"1931", title:"Japan invades Manchuria", note:"League of Nations fails to stop Japanese aggression — its credibility collapses.", color:"red" },
+      { year:"1937", title:"Sino-Japanese War begins", note:"Japan launches full-scale invasion of China including the Rape of Nanjing.", color:"red" },
+      { year:"1938", title:"Annexation of Austria (Anschluss)", note:"Germany absorbs Austria with Western powers standing aside.", color:"red" },
+      { year:"Sept 1938", title:"Munich Agreement", note:"Britain and France appease Hitler by surrendering Czech Sudetenland.", color:"gold" },
+      { year:"Nov 1938", title:"Kristallnacht", note:"Nationwide pogrom against Jews marks escalation to open state violence.", color:"red" },
+      { year:"Sept 1, 1939", title:"German invasion of Poland — WWII begins", note:"Britain and France declare war; the Second World War has started.", color:"red" },
+    ],
+    quiz: [
+      { q:"Which treaty imposed the 'War Guilt Clause' and massive reparations on Germany?", opts:["Treaty of Brest-Litovsk","Treaty of Versailles","Treaty of Locarno","Munich Agreement"], answer:1 },
+      { q:"The Dawes Plan was designed to address which problem?", opts:["German rearmament","Jewish emigration","German reparations payments","Italian territorial claims"], answer:2 },
+      { q:"What was Mussolini's official title as Italian dictator?", opts:["Der Führer","Il Duce","El Caudillo","Der Reichskanzler"], answer:1 },
+      { q:"The Munich Agreement (1938) gave Hitler which territory?", opts:["Austria","Poland","The Rhineland","Czechoslovakia's Sudetenland"], answer:3 },
+      { q:"The Nuremberg Laws (1935) primarily targeted which group?", opts:["Communists","Roma people","Jewish Germans","Political opponents"], answer:2 },
+      { q:"What was the Nazi term for their plan to murder all European Jews?", opts:["Lebensraum","Kristallnacht","Final Solution","Anschluss"], answer:2 },
+      { q:"The T4 Program targeted which group for murder?", opts:["Political prisoners","Jewish people","People with disabilities","Communists"], answer:2 },
+      { q:"Elie Wiesel's memoir Night describes survival in which camp?", opts:["Dachau","Treblinka","Bergen-Belsen","Auschwitz"], answer:3 },
+    ]
+  },
+
+  wwii: {
+    label: "World War II",
+    sections: [
+      {
+        title: "Key Figures",
+        terms: [
+          { name:"Hitler", badge:"person", def:"Adolf Hitler — Nazi dictator of Germany (1933–1945). His ideology of Aryan racial supremacy, antisemitism, and German Lebensraum ('living space') drove both WWII and the Holocaust. He initiated the war with the invasion of Poland (1939) and directed German military strategy until his suicide on April 30, 1945." },
+          { name:"Mussolini", badge:"person", def:"Benito Mussolini — Italian fascist dictator and Hitler's main European ally. Italy joined WWII on Germany's side in June 1940. After Allied forces invaded Italy (1943), Mussolini was overthrown, rescued by Germans, and eventually captured and executed by Italian partisans in April 1945." },
+          { name:"Roosevelt", badge:"person", def:"Franklin D. Roosevelt — US President (1933–1945) who led America through the Depression and WWII. He crafted the Lend-Lease Act to supply the Allies before Pearl Harbor, then directed the massive US war effort. He died in office on April 12, 1945, weeks before Germany's surrender." },
+          { name:"Stalin", badge:"person", def:"Josef Stalin — Soviet dictator who signed the Non-Aggression Pact with Hitler (1939) then was blindsided by Operation Barbarossa (1941). The USSR suffered catastrophic losses — approximately 27 million dead — but ultimately defeated Germany on the Eastern Front, the war's decisive theater." },
+        ]
+      },
+      {
+        title: "Alliances & Ideology",
+        terms: [
+          { name:"Axis Powers", badge:"concept", def:"The alliance of Germany, Italy, and Japan — formalized by the Tripartite Pact (September 1940). They sought to dominate Europe, the Mediterranean, and Asia/Pacific respectively. Minor Axis members included Hungary, Romania, and Bulgaria." },
+          { name:"Allied Powers", badge:"concept", def:"The coalition opposing the Axis, including Britain, France (Free French after 1940), the USSR (from June 1941), the USA (from December 1941), China, and dozens of other nations. Allied cooperation — especially the 'Big Three' (USA, UK, USSR) — was essential to victory." },
+          { name:"GEACPS (Greater East Asian Co-Prosperity Sphere)", badge:"ideology", def:"Japan's propaganda framework for its imperial expansion across Asia. It promised Asian nations liberation from Western colonialism under Japanese leadership in a 'co-prosperity' sphere. In reality, it masked brutal military occupation, forced labor, and resource extraction." },
+          { name:"German-Soviet Pact (Non-Aggression Pact)", badge:"policy", def:"The Molotov-Ribbentrop Pact, signed August 23, 1939. Germany and the USSR agreed not to attack each other and secretly divided Eastern Europe into spheres of influence. It freed Germany to invade Poland without Soviet opposition. Hitler violated it with Operation Barbarossa in June 1941." },
+        ]
+      },
+      {
+        title: "Road to War",
+        terms: [
+          { name:"Beer Hall Putsch", badge:"event", def:"November 1923: Hitler's failed attempt to seize power in Munich by launching a coup from a beer hall. The putsch was crushed; Hitler was imprisoned for 9 months (where he wrote Mein Kampf). Far from ending his career, it made him a national figure and taught him to pursue power through elections." },
+          { name:"Reichstag Fire / Enabling Laws", badge:"event", def:"The February 1933 Reichstag fire gave Hitler the pretext to suspend civil liberties (Reichstag Fire Decree). The subsequent Enabling Act (March 1933) gave him dictatorial legislative powers. Together they mark the death of German democracy and the birth of the Nazi dictatorship." },
+          { name:"Invasion of Poland — Sept 1, 1939", badge:"event", def:"Germany's Blitzkrieg invasion launched WWII. The Wehrmacht used fast-moving armor, motorized infantry, and air power to overwhelm Polish defenses in weeks. The USSR invaded from the east on September 17, crushing Poland between them under the terms of their secret pact." },
+          { name:"Manchuria", badge:"place", def:"Japan's 1931 invasion of Manchuria (northeastern China) and creation of the puppet state of Manchukuo marked the beginning of Japanese imperial expansion in Asia. It exposed the League of Nations' weakness and foreshadowed the broader Pacific conflict." },
+          { name:"Rape of Nanjing", badge:"event", def:"December 1937–January 1938: Japanese forces captured China's then-capital Nanjing and engaged in six weeks of systematic atrocities — mass murder of POWs and civilians (estimates range from 40,000–300,000 killed) and widespread rape. It remains a deeply divisive historical memory between China and Japan." },
+        ]
+      },
+      {
+        title: "Major Battles & Operations",
+        terms: [
+          { name:"Pearl Harbor", badge:"battle", def:"December 7, 1941: Japan launched a surprise naval air attack on the US Pacific Fleet at Pearl Harbor, Hawaii, sinking or damaging 19 ships and killing 2,403 Americans. The next day, the USA declared war on Japan; Germany and Italy declared war on the USA days later, making it a truly world war." },
+          { name:"The Blitz", badge:"event", def:"September 1940–May 1941: Germany's sustained bombing campaign against British cities, primarily London. Over 43,000 British civilians were killed. Rather than breaking British morale as intended, the Blitz united the population behind Churchill's defiant resistance." },
+          { name:"Operation Barbarossa", badge:"battle", def:"June 22, 1941: Germany launched history's largest military operation — 3.8 million troops invaded the USSR on a 2,900-km front. Initial advances were staggering, but the invasion ultimately failed to knock out the USSR before winter, committing Germany to a catastrophic two-front war." },
+          { name:"Battle of Stalingrad", badge:"battle", def:"August 1942–February 1943: The bloodiest battle in history (est. 2 million casualties). Germany's Sixth Army became trapped in the ruins of Stalingrad; its surrender on February 2, 1943 marked the decisive turning point on the Eastern Front and in the entire war." },
+          { name:"Battle of El Alamein", badge:"battle", def:"October–November 1942: British General Montgomery's forces defeated Rommel's Afrika Korps in Egypt. It ended the Axis threat to the Suez Canal and Middle Eastern oil, and was Churchill's turning point: 'Before Alamein we never had a victory. After Alamein we never had a defeat.'" },
+          { name:"Battle of Midway", badge:"battle", def:"June 4–7, 1942: A decisive US naval victory in the Pacific. US codebreakers had identified the target in advance; carrier-based aircraft sank four Japanese fleet carriers, destroying Japan's offensive striking power. It is considered the turning point of the Pacific War." },
+          { name:"Island Hopping", badge:"tactic", def:"The US Pacific strategy of selectively capturing strategically important islands while bypassing heavily fortified Japanese positions. By 'hopping' closer to Japan — through Guadalcanal, Tarawa, Iwo Jima, Okinawa — US forces cut Japanese supply lines and established air bases for bombing the Japanese home islands." },
+          { name:"D-Day / Operation Overlord", badge:"battle", def:"June 6, 1944: The largest seaborne invasion in history. Over 156,000 Allied troops landed on five Normandy beaches, opening the long-awaited Western Front. Though casualties were severe (especially at Omaha Beach), the operation established the Allied foothold that ultimately liberated Western Europe." },
+        ]
+      },
+      {
+        title: "End of War",
+        terms: [
+          { name:"Atomic Bombs — Hiroshima & Nagasaki", badge:"event", def:"On August 6, 1945, the USA dropped the first atomic bomb on Hiroshima (est. 70,000–80,000 killed immediately). On August 9, a second bomb hit Nagasaki (est. 40,000 killed). Japan surrendered on August 15. The bombings remain the only wartime use of nuclear weapons and sparked lasting ethical debate." },
+          { name:"VE Day — May 8, 1945", badge:"event", def:"Victory in Europe Day — Germany's unconditional surrender took effect on May 8, 1945. Hitler had died by suicide on April 30. After six years, the war in Europe was over. Massive celebrations erupted in Allied capitals, though the Pacific war continued for three more months." },
+          { name:"VJ Day — Sept 2, 1945", badge:"event", def:"Victory over Japan Day — Japan formally signed the surrender documents aboard the USS Missouri on September 2, 1945, officially ending WWII. Note: the source document lists VJ Day as 9/15/1945, but the formal surrender ceremony was September 2." },
+        ]
+      }
+    ],
+    timeline: [
+      { year:"Sept 1, 1939", title:"Germany invades Poland — WWII begins", note:"Britain and France declare war on Germany two days later.", color:"red" },
+      { year:"June 1940", title:"Fall of France", note:"Germany defeats France in six weeks; Britain stands alone.", color:"red" },
+      { year:"July–Oct 1940", title:"Battle of Britain", note:"RAF defeats Luftwaffe; Germany cancels invasion plans.", color:"blue" },
+      { year:"Sept 1940–May 1941", title:"The Blitz", note:"Germany bombs British cities; civilian morale holds.", color:"red" },
+      { year:"June 22, 1941", title:"Operation Barbarossa", note:"Germany invades the USSR with the largest army in history.", color:"red" },
+      { year:"Dec 7, 1941", title:"Pearl Harbor", note:"Japan attacks US fleet; USA enters the war.", color:"red" },
+      { year:"June 1942", title:"Battle of Midway", note:"US sinks four Japanese carriers — turning point in the Pacific.", color:"gold" },
+      { year:"Feb 1943", title:"Battle of Stalingrad ends", note:"German Sixth Army surrenders — turning point in Europe.", color:"gold" },
+      { year:"Nov 1942", title:"Battle of El Alamein", note:"Britain defeats Rommel in North Africa.", color:"blue" },
+      { year:"June 6, 1944", title:"D-Day / Operation Overlord", note:"Largest seaborne invasion opens the Western Front.", color:"blue" },
+      { year:"May 8, 1945", title:"VE Day — Germany surrenders", note:"War in Europe ends; Hitler dead by suicide.", color:"green" },
+      { year:"Aug 6 & 9, 1945", title:"Atomic bombs — Hiroshima & Nagasaki", note:"USA drops nuclear weapons; Japan prepares to surrender.", color:"gold" },
+      { year:"Sept 2, 1945", title:"VJ Day — Japan surrenders", note:"WWII officially ends with formal surrender aboard USS Missouri.", color:"green" },
+    ],
+    quiz: [
+      { q:"Which pact allowed Germany to invade Poland without Soviet opposition?", opts:["Tripartite Pact","Anti-Comintern Pact","German-Soviet Non-Aggression Pact","Axis Alliance"], answer:2 },
+      { q:"Operation Barbarossa was Germany's invasion of which country?", opts:["France","Britain","Poland","The Soviet Union"], answer:3 },
+      { q:"The Battle of Midway was a turning point in which theater of WWII?", opts:["North Africa","Eastern Front","Pacific","Western Europe"], answer:2 },
+      { q:"D-Day (Operation Overlord) took place in which country?", opts:["Belgium","Netherlands","Norway","France"], answer:3 },
+      { q:"The Battle of Stalingrad ended with the surrender of which German formation?", opts:["Army Group North","Sixth Army","Afrika Korps","Fourth Panzer Army"], answer:1 },
+      { q:"The GEACPS was Japan's propaganda framework for what?", opts:["Its nuclear program","Its Pacific expansion","Its alliance with Germany","Its occupation of Korea"], answer:1 },
+      { q:"VE Day (Victory in Europe) was celebrated on which date?", opts:["April 30, 1945","May 8, 1945","June 6, 1945","September 2, 1945"], answer:1 },
+      { q:"The USA dropped atomic bombs on which two Japanese cities?", opts:["Tokyo and Osaka","Hiroshima and Nagasaki","Kyoto and Nagoya","Hiroshima and Kyoto"], answer:1 },
+    ]
+  },
+
+  comm: {
+    label: "Communism — USSR & China",
+    sections: [
+      {
+        title: "Core Concepts",
+        terms: [
+          { name:"Communism", badge:"ideology", def:"A political and economic system in which property and production are collectively owned, class distinctions are abolished, and the state (eventually) withers away. In practice, communist states under Lenin, Stalin, and Mao were single-party dictatorships with state-controlled economies and severe restrictions on political freedom." },
+          { name:"Egalitarianism", badge:"concept", def:"The principle that all people are fundamentally equal and deserve equal rights and opportunities. Communist ideology promised economic egalitarianism — eliminating the gap between rich and poor through collective ownership. In practice, communist party members enjoyed significant privileges denied to ordinary citizens." },
+          { name:"Command / Planned Economy: 5 Year Plans", badge:"policy", def:"In command economies, the government (not the market) sets production targets, prices, and resource allocation. Stalin's Five Year Plans (beginning 1928) set ambitious industrialization goals, rapidly transforming the USSR into an industrial power at enormous human cost." },
+          { name:"Centralization", badge:"concept", def:"The concentration of control in a central authority. Communist states centralized economic planning, political power, and cultural life in the party and its leadership. Centralization eliminated local autonomy and created massive bureaucracies prone to inefficiency and corruption." },
+        ]
+      },
+      {
+        title: "Stalin's USSR",
+        terms: [
+          { name:"Stalinism", badge:"ideology", def:"The political system associated with Josef Stalin's rule (1924–1953): one-man dictatorship, cult of personality, forced industrialization through Five Year Plans, collectivization of agriculture, mass political terror (the Great Purge), and the Gulag system. It became the template for many communist regimes worldwide." },
+          { name:"New Economic Policy (NEP)", badge:"policy", def:"Lenin's 1921 tactical retreat from pure communism, allowing limited private trade and small-scale capitalism to revive the Soviet economy after years of revolutionary war and famine. It succeeded economically but was abandoned by Stalin in 1928 in favor of forced collectivization and industrialization." },
+          { name:"The Great Purge", badge:"event", def:"Stalin's campaign of political terror (1936–1938) that executed or imprisoned hundreds of thousands of Soviet citizens — including most senior military officers, Communist Party officials, intellectuals, and 'class enemies.' It eliminated all potential rivals and instilled total fear, but devastated Soviet military capability before WWII." },
+          { name:"Show Trials", badge:"tactic", def:"Theatrical public trials staged during the Great Purge in which prominent Bolsheviks and military leaders 'confessed' to implausible crimes (espionage, sabotage, Trotskyism) after torture and psychological pressure. They were designed to justify purges to the public and demonstrate Stalin's absolute power." },
+          { name:"Gulag", badge:"place", def:"The Soviet network of forced labor camps (Glavnoye Upravleniye Lagerey — Main Camp Administration). From 1918–1956, an estimated 18 million people passed through the gulag system; millions died. Prisoners worked in brutal conditions in mines, forests, and construction projects across Siberia and Central Asia." },
+          { name:"NKVD", badge:"tactic", def:"The People's Commissariat for Internal Affairs — Stalin's secret police, predecessors of the KGB. The NKVD conducted the Great Purge, ran the gulag system, carried out mass executions (including the Katyn massacre of 22,000 Polish officers in 1940), and enforced political conformity through terror." },
+          { name:"Kulak + Forced Collectivization", badge:"policy", def:"Kulaks were prosperous peasant farmers targeted by Stalin as class enemies. Beginning in 1929, Stalin forced peasants onto collective farms (kolkhozy), seizing private land and livestock. Kulaks who resisted were arrested, executed, or exiled. Collectivization caused mass famine and killed millions." },
+          { name:"Holodomor / Terror Famine", badge:"event", def:"The Soviet-engineered famine of 1932–33 that killed an estimated 3.5–7.5 million Ukrainians. Stalin's grain quotas stripped Ukrainian farms bare even as people starved. Ukraine and most Western nations recognize it as genocide — a deliberate act to crush Ukrainian national resistance." },
+        ]
+      },
+      {
+        title: "China's Road to Communism",
+        terms: [
+          { name:"Sun Yat-sen", badge:"person", def:"(1866–1925) Chinese revolutionary, physician, and politician — the 'Father of Modern China.' He led the 1911 revolution that ended imperial rule and briefly served as first president of the Republic of China. He founded the Nationalist Party (Kuomintang) and developed the 'Three Principles of the People.'" },
+          { name:"May 4th Movement", badge:"event", def:"Student-led protest movement in China (May 4, 1919) against the Treaty of Versailles' decision to give Germany's Chinese concessions to Japan rather than restore Chinese sovereignty. It sparked a broader cultural and intellectual movement embracing science, democracy, and eventually Marxism." },
+          { name:"Nationalist Party (GMD / KMT / Kuomintang / Guomindang)", badge:"concept", def:"China's ruling Nationalist party under Chiang Kai-shek. It governed much of China from the 1920s until losing the Civil War to the Communists in 1949. The KMT retreated to Taiwan, where it ruled for decades. The party still exists today as a major Taiwan political force." },
+          { name:"Chiang Kai-shek", badge:"person", def:"(1887–1975) Leader of the Chinese Nationalist Party (KMT) after Sun Yat-sen's death. He unified much of China through the Northern Expedition but faced constant challenges from Communist insurgents and Japanese invasion. After losing the Civil War to Mao in 1949, he retreated to Taiwan and ruled as ROC president until his death." },
+          { name:"Northern Expedition", badge:"event", def:"(1926–1928) Military campaign launched by the KMT and its Communist allies to reunify China by defeating warlords who controlled much of the country. Initially successful, it ended with Chiang turning on his Communist allies in the Shanghai Massacre (1927), splitting the anti-warlord coalition." },
+          { name:"Chinese Civil War", badge:"event", def:"The conflict between Chiang Kai-shek's Nationalists (KMT) and Mao Zedong's Communists (CCP), fought intermittently 1927–1949 (suspended during the Japanese invasion). The Communists won a decisive victory in 1949; the Nationalists fled to Taiwan, where they continued to claim to be China's legitimate government." },
+          { name:"Chinese Republic", badge:"concept", def:"The Republic of China (ROC) established in 1912 after the fall of the Qing dynasty. Under KMT rule, it governed mainland China until 1949 when it was driven to Taiwan by the Communists. The ROC government in Taiwan continues to exist today." },
+          { name:"CCP (Chinese Communist Party)", badge:"concept", def:"Founded in 1921 in Shanghai with Soviet assistance. Under Mao Zedong's leadership (from the Long March era), the CCP built a rural revolutionary base and won the Civil War. The CCP has been the sole governing party of the People's Republic of China since 1949." },
+          { name:"Mao Zedong", badge:"person", def:"(1893–1976) Chairman of the Chinese Communist Party and founder of the People's Republic of China. He adapted Marxism-Leninism to a peasant society, won the Civil War, and launched radical campaigns — the Great Leap Forward (causing 15–55 million deaths) and Cultural Revolution — that transformed and traumatized China." },
+          { name:"PRC (People's Republic of China)", badge:"concept", def:"The communist state founded on October 1, 1949 when Mao Zedong proclaimed victory after the Civil War. The PRC has governed mainland China ever since under CCP one-party rule. It is today the world's most populous country and second largest economy." },
+          { name:"Taiwan", badge:"place", def:"The island to which Chiang Kai-shek and the KMT government fled in 1949 after losing the Civil War. The Republic of China on Taiwan developed into a prosperous democracy. Its political status — de facto independent but claimed by the PRC — remains one of Asia's most sensitive geopolitical issues." },
+        ]
+      },
+      {
+        title: "Mao's China",
+        terms: [
+          { name:"Great Leap Forward", badge:"event", def:"(1958–1962) Mao's campaign to rapidly transform China into a communist industrial and agricultural society. Collectivization was pushed to extremes; steel production was prioritized over food. Falsified harvest reports hid the reality: a famine that killed an estimated 15–55 million people — the deadliest famine in history." },
+          { name:"Cultural Revolution", badge:"event", def:"(1966–1976) Mao's campaign to purge 'bourgeois' elements and reassert his authority after the Great Leap disaster. Red Guards attacked teachers, intellectuals, and party officials; ancient temples and artifacts were destroyed; millions were persecuted. It paralyzed China for a decade and caused an estimated 500,000–2 million deaths." },
+          { name:"Red Guards", badge:"tactic", def:"Student paramilitary groups mobilized by Mao during the Cultural Revolution. They attacked anyone deemed insufficiently revolutionary — teachers, party officials, religious figures — forcing public 'self-criticism,' destroying cultural artifacts, and carrying out violent purges. They became instruments of mob terror." },
+          { name:"Four Olds", badge:"ideology", def:"The Cultural Revolution's targets for destruction: Old Customs, Old Culture, Old Habits, and Old Ideas. Red Guards attacked temples, books, art, and traditions seen as representing China's pre-communist past. Vast amounts of cultural heritage were destroyed in the campaign's early years." },
+        ]
+      }
+    ],
+    timeline: [
+      { year:"1917", title:"Bolshevik Revolution", note:"Lenin seizes power in Russia — the world's first communist state.", color:"purple" },
+      { year:"1921", title:"CCP founded", note:"Chinese Communist Party established in Shanghai with Soviet support.", color:"purple" },
+      { year:"1924–28", title:"Northern Expedition", note:"KMT and CCP allied to unify China; then Chiang turns on Communists.", color:"gold" },
+      { year:"1928", title:"Stalin begins collectivization & Five Year Plans", note:"Forced collectivization of Soviet agriculture begins.", color:"red" },
+      { year:"1932–33", title:"Holodomor / Terror Famine", note:"Soviet famine kills millions in Ukraine — now recognized as genocide.", color:"red" },
+      { year:"1936–38", title:"The Great Purge", note:"Stalin's mass terror eliminates rivals and terrifies Soviet society.", color:"red" },
+      { year:"1934–35", title:"Long March", note:"CCP forces retreat 9,000 km under KMT attack; Mao consolidates leadership.", color:"purple" },
+      { year:"1945–49", title:"Chinese Civil War (final phase)", note:"CCP defeats KMT; Mao proclaims People's Republic of China.", color:"red" },
+      { year:"Oct 1, 1949", title:"PRC founded", note:"Mao announces the People's Republic of China from Tiananmen Gate.", color:"purple" },
+      { year:"1958–62", title:"Great Leap Forward", note:"Mao's collectivization causes history's deadliest famine.", color:"red" },
+      { year:"1953", title:"Stalin dies", note:"After 29 years, Soviet totalitarianism's architect is gone.", color:"gold" },
+      { year:"1966–76", title:"Cultural Revolution", note:"Mao unleashes Red Guards; China's culture and institutions devastated.", color:"red" },
+    ],
+    quiz: [
+      { q:"Stalin's Five Year Plans primarily aimed to achieve what?", opts:["Democratic reform","Military victory","Rapid industrialization","Agricultural surplus"], answer:2 },
+      { q:"The Holodomor was a famine deliberately engineered in which country?", opts:["Russia","Poland","Kazakhstan","Ukraine"], answer:3 },
+      { q:"The Great Purge primarily eliminated whom within the USSR?", opts:["Foreign spies","Kulak peasants","Political rivals and military officers","Industrial workers"], answer:2 },
+      { q:"Who founded the Chinese Nationalist Party (Kuomintang)?", opts:["Mao Zedong","Chiang Kai-shek","Sun Yat-sen","Deng Xiaoping"], answer:2 },
+      { q:"The People's Republic of China was founded in which year?", opts:["1945","1947","1949","1951"], answer:2 },
+      { q:"The Great Leap Forward resulted primarily in?", opts:["Rapid industrialization","A devastating famine","Military expansion","Agricultural success"], answer:1 },
+      { q:"What were the targets of Mao's 'Four Olds' campaign?", opts:["Old generals, old weapons, old tactics, old alliances","Old customs, old culture, old habits, old ideas","Old farms, old factories, old cities, old roads","Old leaders, old parties, old laws, old borders"], answer:1 },
+      { q:"The Cultural Revolution's youth paramilitary force was called?", opts:["Red Army","People's Guard","Red Guards","Communist Youth League"], answer:2 },
+    ]
+  },
+
+  cold: {
+    label: "Cold War",
+    sections: [
+      {
+        title: "Key Figures",
+        terms: [
+          { name:"JFK (John F. Kennedy)", badge:"person", def:"US President (1961–1963). Faced the Cuban Missile Crisis (1962) — the Cold War's most dangerous confrontation — and negotiated a peaceful resolution with Khrushchev. Assassinated in Dallas on November 22, 1963. His presidency symbolized both Cold War tension and the hope for peaceful coexistence." },
+          { name:"Mao Zedong", badge:"person", def:"Leader of communist China throughout most of the Cold War. Initially aligned with the USSR but broke with Moscow by the early 1960s (Sino-Soviet split). His China fought the USA in Korea and supported North Vietnam. His death in 1976 opened the way for China's pragmatic reform under Deng Xiaoping." },
+          { name:"Chiang Kai-shek", badge:"person", def:"KMT leader who retreated to Taiwan in 1949 with US backing. His Republic of China on Taiwan was America's ally against communist China throughout the Cold War, holding China's UN Security Council seat until 1971. He died in 1975, having never recovered the mainland." },
+          { name:"Ronald Reagan", badge:"person", def:"US President (1981–1989) who dramatically escalated Cold War pressure on the USSR through the Reagan Doctrine — supporting anti-communist insurgencies in Afghanistan, Nicaragua, Angola, etc. — and a massive military buildup that strained Soviet resources. His confrontational approach accelerated the Cold War's end." },
+          { name:"Mikhail Gorbachev", badge:"person", def:"Final leader of the Soviet Union (1985–1991). Introduced glasnost (openness) and perestroika (restructuring) to reform the failing USSR. His reforms inadvertently unleashed nationalist forces and economic crisis. He allowed Eastern European communist regimes to fall without Soviet military intervention, ending the Cold War." },
+          { name:"Kim Il Sung", badge:"person", def:"Soviet-backed leader of North Korea who launched the Korean War in June 1950 by invading South Korea. Founded the Kim family dynasty that still rules North Korea. His regime was one of the most totalitarian communist states, combining Marxism with a quasi-religious cult of personality." },
+          { name:"Ho Chi Minh", badge:"person", def:"Vietnamese communist revolutionary and leader of North Vietnam. Led the independence war against France (1945–54) and then directed North Vietnam's reunification struggle against South Vietnam and the USA. Died in 1969, before seeing Vietnamese reunification in 1975. Saigon was renamed Ho Chi Minh City." },
+        ]
+      },
+      {
+        title: "Ideologies & Systems",
+        terms: [
+          { name:"Communism", badge:"ideology", def:"The Soviet and Chinese political system: state ownership of all productive resources, one-party rule, centralized planning, and suppression of political opposition. The Cold War was fundamentally an ideological contest between communist collectivism and Western liberal capitalism." },
+          { name:"Capitalism / Free-Market Economy", badge:"ideology", def:"The Western economic system championed by the USA: private ownership, market pricing, competition, and individual economic freedom. The Cold War pitted capitalism's promise of prosperity and freedom against communism's promise of equality — with both sides using their systems as ideological weapons." },
+          { name:"Dictatorship", badge:"concept", def:"Government by a single leader (or small group) with absolute power and no meaningful political opposition. Soviet satellite states, Mao's China, North Korea, and Cold War-era communist regimes were one-party dictatorships that jailed or executed political dissidents." },
+          { name:"Clash of Systems", badge:"concept", def:"The fundamental Cold War tension: not just a military rivalry but a contest between two incompatible visions of political and economic organization — liberal democratic capitalism vs. Soviet communism. Both sides believed their system was superior and historically destined to prevail." },
+          { name:"1st World, 2nd World, 3rd World", badge:"concept", def:"Cold War categorization: 1st World = Western capitalist democracies (USA and allies); 2nd World = Soviet-bloc communist states; 3rd World = non-aligned or developing nations caught between the superpowers. Both superpowers competed for influence in the 'Third World.'" },
+          { name:"Glasnost", badge:"policy", def:"'Openness' in Russian — Gorbachev's policy (from 1986) of relaxing censorship, allowing public debate, and acknowledging past Soviet failures. It was intended to reinvigorate Soviet society but instead unleashed pent-up criticism of the system and accelerated demands for reform and independence." },
+          { name:"Perestroika", badge:"policy", def:"'Restructuring' in Russian — Gorbachev's economic reform program attempting to decentralize the Soviet economy and reduce bureaucratic inefficiency. It failed to revitalize the economy while undermining central control, contributing to the USSR's disintegration." },
+        ]
+      },
+      {
+        title: "US Policy & Alliances",
+        terms: [
+          { name:"Truman Doctrine", badge:"policy", def:"1947 policy by President Truman pledging US military and economic support to any nation threatened by communist takeover. First applied to Greece and Turkey. It committed the USA to a global anti-communist mission and became the basis for Cold War interventions from Korea to Vietnam." },
+          { name:"The Marshall Plan", badge:"policy", def:"1948 US program providing over $13 billion in economic aid to rebuild war-devastated Western European economies. Aimed to prevent desperate populations from turning to communism. It succeeded in stabilizing Western Europe and was seen as the economic dimension of containment." },
+          { name:"Containment", badge:"policy", def:"The master strategy of US Cold War foreign policy, articulated by diplomat George Kennan. Rather than attempting to 'roll back' communism where it already existed, the USA would prevent its further spread — through military alliances, economic aid, and intervention in threatened countries." },
+          { name:"NATO", badge:"policy", def:"The North Atlantic Treaty Organization (1949) — a mutual defense alliance committing the USA, Canada, and Western European nations to collective defense: an attack on one is an attack on all. NATO provided the military structure for Western containment of Soviet power in Europe." },
+          { name:"Warsaw Pact", badge:"policy", def:"The Soviet-led military alliance (1955) binding Eastern European satellite states — Poland, East Germany, Czechoslovakia, Hungary, Romania, Bulgaria, and Albania — to collective defense under Soviet command. It was the communist counterpart to NATO and provided legal cover for Soviet military intervention in Eastern Europe." },
+          { name:"Iron Curtain", badge:"concept", def:"Winston Churchill's famous 1946 term for the ideological, political, and physical divide separating communist Eastern Europe from democratic Western Europe. Physically embodied by the Berlin Wall (1961). It symbolized the continent's division into two hostile blocs for the entire Cold War." },
+          { name:"Eastern Bloc", badge:"place", def:"The Soviet-dominated communist states of Central and Eastern Europe: Poland, East Germany, Czechoslovakia, Hungary, Romania, Bulgaria, and (until 1948) Yugoslavia. Their governments were installed or controlled by Moscow; Soviet troops crushed uprisings in Hungary (1956) and Czechoslovakia (1968)." },
+        ]
+      },
+      {
+        title: "Conflicts & Crises",
+        terms: [
+          { name:"Proxy War", badge:"tactic", def:"Conflicts where the USA and USSR supported opposing sides without fighting each other directly — avoiding nuclear escalation while advancing their interests. Korea, Vietnam, Angola, Afghanistan, and many other Cold War conflicts were proxy battles between the superpowers." },
+          { name:"Arms Race", badge:"tactic", def:"The escalating US-Soviet competition to build larger nuclear arsenals and delivery systems. Both sides built enough weapons to destroy civilization many times over. The doctrine of Mutually Assured Destruction (MAD) paradoxically stabilized the Cold War — neither side could strike first without assuring its own destruction." },
+          { name:"Korean War", badge:"event", def:"(1950–1953) Soviet-backed North Korea invaded South Korea in June 1950. US-led UN forces pushed back, advancing toward China's border, prompting Chinese intervention. A brutal stalemate formed near the original border; an armistice was signed in 1953 — technically the war has never officially ended." },
+          { name:"Vietnam War", badge:"event", def:"(1955–1975) US-backed South Vietnam fought North Vietnam (backed by USSR and China) in a grueling proxy war. Despite massive US military intervention (500,000 troops by 1969), public opposition and military difficulties led to US withdrawal (1973); South Vietnam fell to the North in 1975." },
+          { name:"Berlin Blockade & Airlift", badge:"event", def:"June 1948–May 1949: The USSR blockaded all road and rail access to West Berlin, trying to force the Western powers out. The West responded with a massive airlift — over 200,000 flights supplying the city. The Soviets backed down after 11 months, and the airlift became a symbol of Western resolve." },
+          { name:"Berlin Wall", badge:"place", def:"Built overnight starting August 13, 1961, by East Germany to stop the exodus of its citizens to the West. Over 100 people were killed trying to cross it. Its fall on November 9, 1989 — as communist governments collapsed across Eastern Europe — became the defining symbol of the Cold War's end." },
+        ]
+      }
+    ],
+    timeline: [
+      { year:"1945", title:"WWII ends — Cold War begins", note:"The US-Soviet wartime alliance fractures as ideological rivalry intensifies.", color:"gold" },
+      { year:"1947", title:"Truman Doctrine & Marshall Plan", note:"USA commits to containment and rebuilds Western Europe economically.", color:"blue" },
+      { year:"1948–49", title:"Berlin Blockade & Airlift", note:"First major Cold War crisis; Western resolve demonstrated without military confrontation.", color:"blue" },
+      { year:"1949", title:"NATO founded / USSR tests atomic bomb / PRC founded", note:"Three seismic events reshape the Cold War in a single year.", color:"gold" },
+      { year:"1950–53", title:"Korean War", note:"First hot proxy conflict ends in stalemate on the Korean peninsula.", color:"red" },
+      { year:"1955", title:"Warsaw Pact formed", note:"Soviet military alliance formalizes Eastern Bloc structure.", color:"red" },
+      { year:"1961", title:"Berlin Wall built", note:"East Germany seals the border; the Iron Curtain becomes concrete and steel.", color:"red" },
+      { year:"1962", title:"Cuban Missile Crisis", note:"The closest the superpowers came to nuclear war; resolved diplomatically.", color:"gold" },
+      { year:"1965–75", title:"Vietnam War", note:"US fails to prevent communist reunification of Vietnam.", color:"red" },
+      { year:"1979–89", title:"Soviet-Afghan War", note:"USSR's 'Vietnam' — costly, unwinnable, and economically devastating.", color:"red" },
+      { year:"1985", title:"Gorbachev takes power", note:"Glasnost and perestroika reforms begin — inadvertently dooming the USSR.", color:"gold" },
+      { year:"Nov 9, 1989", title:"Berlin Wall falls", note:"Communist regimes collapse across Eastern Europe in the Revolutions of 1989.", color:"green" },
+      { year:"Dec 25, 1991", title:"USSR dissolves", note:"The Soviet Union formally ceases to exist; Cold War ends.", color:"green" },
+    ],
+    quiz: [
+      { q:"The Truman Doctrine committed the USA to which foreign policy goal?", opts:["Defeating the Soviet army","Containment of communism","Regime change in the USSR","Nuclear superiority"], answer:1 },
+      { q:"What was Gorbachev's policy of economic restructuring called?", opts:["Glasnost","Détente","Perestroika","Collectivization"], answer:2 },
+      { q:"The Berlin Airlift was a response to which Soviet action?", opts:["Building the Berlin Wall","Blockading West Berlin","Invading South Korea","Establishing the Warsaw Pact"], answer:1 },
+      { q:"Winston Churchill's term 'Iron Curtain' described what?", opts:["Soviet nuclear arsenal","The Berlin Wall","Division between communist East and democratic West Europe","The Warsaw Pact"], answer:2 },
+      { q:"The Korean War ended with?", opts:["A US victory","A North Korean victory","An armistice / stalemate","Chinese occupation"], answer:2 },
+      { q:"Which organization was the communist counterpart to NATO?", opts:["Comintern","Warsaw Pact","Eastern Bloc","Red Alliance"], answer:1 },
+      { q:"The Marshall Plan provided economic aid to rebuild which region after WWII?", opts:["East Asia","Latin America","Western Europe","The Middle East"], answer:2 },
+      { q:"Ronald Reagan's Cold War strategy involved?", opts:["Détente with the USSR","Supporting anti-communist insurgencies worldwide","Reducing US military spending","Joining the Non-Aligned Movement"], answer:1 },
+    ]
+  }
 };
 
-const TIMELINE = [
-  { year:"1917", title:"Bolshevik Revolution", note:"Lenin's communist takeover of Russia creates the world's first Soviet state.", color:"red" },
-  { year:"1924", title:"Stalin rises to power", note:"Following Lenin's death, Stalin maneuvers to become the dominant leader of the USSR.", color:"red" },
-  { year:"1932–33", title:"Holodomor", note:"Soviet-engineered famine kills millions in Ukraine.", color:"red" },
-  { year:"1936–38", title:"Great Purge", note:"Stalin's mass political repression executes or imprisons hundreds of thousands.", color:"red" },
-  { year:"1945", title:"End of WWII / Cold War begins", note:"The wartime alliance between the USA and USSR breaks down as ideological rivalry intensifies.", color:"gold" },
-  { year:"1947", title:"Truman Doctrine & Marshall Plan", note:"USA commits to containment and funds European reconstruction to resist communism.", color:"blue" },
-  { year:"1948–49", title:"Berlin Blockade & Airlift", note:"Soviets blockade West Berlin; Western powers respond with a massive airlift.", color:"blue" },
-  { year:"1949", title:"NATO founded / PRC established", note:"Western military alliance formed; Mao Zedong wins Chinese Civil War.", color:"gold" },
-  { year:"1950–53", title:"Korean War", note:"First major hot proxy conflict of the Cold War ends in stalemate.", color:"red" },
-  { year:"1955", title:"Warsaw Pact formed", note:"Soviet military alliance formalizes Eastern Bloc structure.", color:"red" },
-  { year:"1958–62", title:"Great Leap Forward", note:"Mao's collectivization campaign causes famine killing tens of millions in China.", color:"red" },
-  { year:"1961", title:"Berlin Wall built", note:"East Germany erects wall to stop mass emigration to West Berlin.", color:"red" },
-  { year:"1965–75", title:"Vietnam War", note:"USA fails to prevent communist North Vietnam from reunifying the country.", color:"gold" },
-  { year:"1985", title:"Gorbachev takes power", note:"Launches glasnost and perestroika reform programs in the USSR.", color:"gold" },
-  { year:"1989", title:"Fall of the Berlin Wall", note:"Mass protests across Eastern Europe topple communist regimes.", color:"green" },
-  { year:"1991", title:"USSR dissolves", note:"The Soviet Union formally collapses; Cold War ends.", color:"green" },
-];
-
-const QUIZ_QUESTIONS = [
-  { q:"Which US policy aimed to prevent the spread of Soviet communism beyond where it already existed?", opts:["Marshall Plan","Containment","Truman Doctrine","Red Scare"], answer:1 },
-  { q:"What was the name of Gorbachev's policy of political openness in the USSR?", opts:["Perestroika","Glasnost","Collectivization","Dekulakization"], answer:1 },
-  { q:"The Berlin Airlift was a Western response to what Soviet action?", opts:["Building the Berlin Wall","Invading South Korea","Blockading West Berlin","Establishing the Warsaw Pact"], answer:2 },
-  { q:"Who led the Chinese Communist Party to victory in China's Civil War in 1949?", opts:["Sun Yat-Sen","Chiang Kai-Shek","Ho Chi Minh","Mao Zedong"], answer:3 },
-  { q:"What term did Winston Churchill use to describe the division between communist Eastern Europe and democratic Western Europe?", opts:["Red Line","Iron Curtain","Eastern Bloc","Containment Zone"], answer:1 },
-  { q:"The Holodomor was a famine that killed millions in which country?", opts:["Poland","Russia","Ukraine","Romania"], answer:2 },
-  { q:"Which US program provided over $13 billion to rebuild Western European economies after WWII?", opts:["Truman Doctrine","Reagan Doctrine","Marshall Plan","NATO Treaty"], answer:2 },
-  { q:"Stalin's campaign to destroy prosperous peasant farmers was known as?", opts:["Collectivization","Dekulakization","Great Purge","Glasnost"], answer:1 },
-  { q:"The Korean War ended in?", opts:["A US victory","A North Korean victory","A Chinese victory","An armistice / stalemate"], answer:3 },
-  { q:"Which Soviet leader's reforms inadvertently accelerated the collapse of the USSR?", opts:["Stalin","Lenin","Gorbachev","Ceaușescu"], answer:2 },
-  { q:"Ho Chi Minh led communist forces in which country?", opts:["Korea","China","Vietnam","Cuba"], answer:2 },
-  { q:"The Great Leap Forward was launched by Mao Zedong in which decade?", opts:["1940s","1950s","1960s","1970s"], answer:1 },
-  { q:"Countries controlled by the USSR but nominally independent were called?", opts:["Puppet states","Iron states","Satellite states","Proxy states"], answer:2 },
-  { q:"During the Cold War, conflicts where the USA and USSR backed opposing sides without fighting directly were known as?", opts:["Nuclear wars","Proxy wars","Guerrilla wars","Trade wars"], answer:1 },
-  { q:"Ronald Reagan's strategy of supporting anti-communist insurgencies worldwide is associated with?", opts:["Containment","Détente","The Reagan Doctrine","MAD"], answer:2 },
-];
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let currentUnit = 'wwi';
+let currentFeatureTab = 'terms';
+let quizState = { index: 0, score: 0, answered: false, questions: [] };
 
 /* ══════════════════════════════════════
    RENDER TERMS
@@ -703,9 +1011,13 @@ function buildCard(term) {
   const card = document.createElement('div');
   card.className = 'term-card';
   card.dataset.name = term.name.toLowerCase();
-  card.dataset.def  = term.def.toLowerCase();
+  card.dataset.def  = (term.def || '').toLowerCase();
 
-  const accentMap = { policy:'var(--red)', person:'var(--blue)', concept:'var(--gold)', event:'var(--green)', place:'#888', tactic:'var(--purple)' };
+  const accentMap = {
+    policy:'var(--red)', person:'var(--blue)', concept:'var(--gold)',
+    event:'var(--green)', place:'#888', tactic:'var(--purple)',
+    battle:'var(--red)', treaty:'var(--gold)', ideology:'var(--purple)'
+  };
   card.style.setProperty('--accent-color', accentMap[term.badge] || 'var(--red)');
 
   card.innerHTML = `
@@ -714,23 +1026,37 @@ function buildCard(term) {
       <span class="term-badge badge-${term.badge}">${term.badge}</span>
       <span class="toggle">+</span>
     </div>
-    <div class="term-def">${term.def}</div>
+    <div class="term-def">${term.def || ''}</div>
   `;
   card.addEventListener('click', () => card.classList.toggle('open'));
   return card;
 }
 
-Object.entries(TERMS).forEach(([key, list]) => {
-  const grid = document.getElementById('grid-' + key);
-  if (grid) list.forEach(t => grid.appendChild(buildCard(t)));
-});
+function renderTerms(unitKey) {
+  const container = document.getElementById('terms-container');
+  container.innerHTML = '';
+  const unit = UNITS[unitKey];
+  unit.sections.forEach(section => {
+    const block = document.createElement('div');
+    block.className = 'section-block';
+    block.innerHTML = `<div class="section-label">${section.title}</div>`;
+    const grid = document.createElement('div');
+    grid.className = 'term-grid';
+    section.terms.forEach(t => grid.appendChild(buildCard(t)));
+    block.appendChild(grid);
+    container.appendChild(block);
+  });
+  // reset search
+  const si = document.getElementById('term-search');
+  if (si) si.value = '';
+  document.getElementById('no-results').style.display = 'none';
+  document.querySelectorAll('.term-card').forEach(c => c.style.display = '');
+  document.querySelectorAll('.section-block').forEach(b => b.style.display = '');
+}
 
 /* ── Search ── */
-const searchInput = document.getElementById('term-search');
-const noResults   = document.getElementById('no-results');
-
-searchInput.addEventListener('input', () => {
-  const q = searchInput.value.toLowerCase().trim();
+document.getElementById('term-search').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
   let visible = 0;
   document.querySelectorAll('.term-card').forEach(card => {
     const match = !q || card.dataset.name.includes(q) || card.dataset.def.includes(q);
@@ -741,39 +1067,60 @@ searchInput.addEventListener('input', () => {
     const anyVisible = [...block.querySelectorAll('.term-card')].some(c => c.style.display !== 'none');
     block.style.display = anyVisible ? '' : (q ? 'none' : '');
   });
-  noResults.style.display = (q && visible === 0) ? 'block' : 'none';
+  document.getElementById('no-results').style.display = (q && visible === 0) ? 'block' : 'none';
 });
 
 /* ══════════════════════════════════════
    TIMELINE
 ══════════════════════════════════════ */
-const tlContainer = document.getElementById('timeline');
-TIMELINE.forEach(item => {
-  const el = document.createElement('div');
-  el.className = 'tl-item';
-  el.innerHTML = `
-    <div class="tl-dot ${item.color === 'red' ? '' : item.color}"></div>
-    <div class="tl-year ${item.color === 'red' ? '' : item.color}">${item.year}</div>
-    <div class="tl-title">${item.title}</div>
-    <div class="tl-note">${item.note}</div>
-  `;
-  tlContainer.appendChild(el);
-});
+function renderTimeline(unitKey) {
+  const container = document.getElementById('timeline');
+  container.innerHTML = '';
+  UNITS[unitKey].timeline.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'tl-item';
+    const dotClass = item.color === 'red' ? '' : item.color;
+    const yearClass = item.color === 'red' ? '' : item.color;
+    el.innerHTML = `
+      <div class="tl-dot ${dotClass}"></div>
+      <div class="tl-year ${yearClass}">${item.year}</div>
+      <div class="tl-title">${item.title}</div>
+      <div class="tl-note">${item.note}</div>
+    `;
+    container.appendChild(el);
+  });
+}
 
 /* ══════════════════════════════════════
    QUIZ
 ══════════════════════════════════════ */
-let qIndex = 0, score = 0, answered = false;
-const shuffled = [...QUIZ_QUESTIONS].sort(() => Math.random() - 0.5);
+function initQuiz(unitKey) {
+  const questions = [...UNITS[unitKey].quiz].sort(() => Math.random() - 0.5);
+  quizState = { index: 0, score: 0, answered: false, questions };
 
-function renderQuiz() {
-  const total = shuffled.length;
-  const q = shuffled[qIndex];
+  const wrap = document.querySelector('.quiz-wrap');
+  wrap.innerHTML = `
+    <div class="quiz-progress" id="quiz-progress"></div>
+    <div class="quiz-q" id="quiz-q"></div>
+    <div class="quiz-opts" id="quiz-opts"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+    <div class="quiz-footer">
+      <button class="quiz-btn" id="quiz-next">Next →</button>
+      <div class="quiz-score" id="quiz-score"></div>
+    </div>
+  `;
+  document.getElementById('quiz-next').addEventListener('click', advanceQuiz);
+  renderQuizQuestion();
+}
 
-  // Progress pips
+function renderQuizQuestion() {
+  const { index, score, questions } = quizState;
+  const total = questions.length;
+  const q = questions[index];
+
   const prog = document.getElementById('quiz-progress');
-  prog.innerHTML = shuffled.map((_, i) => {
-    const cls = i < qIndex ? 'done' : i === qIndex ? 'active' : '';
+  prog.innerHTML = questions.map((_, i) => {
+    const cls = i < index ? 'done' : i === index ? 'active' : '';
     return `<div class="quiz-pip ${cls}"></div>`;
   }).join('');
 
@@ -788,81 +1135,89 @@ function renderQuiz() {
     btn.className = 'quiz-opt';
     btn.textContent = opt;
     btn.addEventListener('click', () => {
-      if (answered) return;
-      answered = true;
+      if (quizState.answered) return;
+      quizState.answered = true;
       [...opts.querySelectorAll('.quiz-opt')].forEach(b => b.disabled = true);
       if (i === q.answer) {
         btn.classList.add('correct');
-        score++;
+        quizState.score++;
         document.getElementById('quiz-feedback').textContent = '✓ Correct!';
       } else {
         btn.classList.add('wrong');
         opts.querySelectorAll('.quiz-opt')[q.answer].classList.add('correct');
         document.getElementById('quiz-feedback').textContent = '✗ Not quite — see the highlighted answer.';
       }
-      document.getElementById('quiz-score').textContent = `${score} / ${total}`;
+      document.getElementById('quiz-score').textContent = `${quizState.score} / ${total}`;
     });
     opts.appendChild(btn);
   });
-  answered = false;
+  quizState.answered = false;
 }
 
-document.getElementById('quiz-next').addEventListener('click', () => {
-  qIndex++;
-  if (qIndex >= shuffled.length) {
-    showResult();
+function advanceQuiz() {
+  quizState.index++;
+  if (quizState.index >= quizState.questions.length) {
+    showQuizResult();
   } else {
-    renderQuiz();
+    renderQuizQuestion();
   }
-});
+}
 
-function showResult() {
-  const total = shuffled.length;
+function showQuizResult() {
+  const { score, questions } = quizState;
+  const total = questions.length;
   const pct = Math.round((score / total) * 100);
-  const msg = pct >= 80 ? 'Great work — you know this cold.' : pct >= 60 ? 'Solid effort — review the ones you missed.' : 'Keep studying — you\'ll get there.';
+  const msg = pct >= 80 ? 'Excellent — you know this material well.' : pct >= 60 ? 'Good effort — review the ones you missed.' : 'Keep studying — you\'ll get there.';
   document.querySelector('.quiz-wrap').innerHTML = `
     <div class="quiz-result">
       <div class="big">${score}<em>/${total}</em></div>
       <p>${msg}</p>
-      <button class="quiz-btn" onclick="restartQuiz()">Try again →</button>
+      <button class="quiz-btn" onclick="initQuiz('${currentUnit}')">Try again →</button>
     </div>
   `;
 }
-
-function restartQuiz() {
-  qIndex = 0; score = 0; answered = false;
-  shuffled.sort(() => Math.random() - 0.5);
-  const wrap = document.querySelector('.quiz-wrap');
-  wrap.innerHTML = `
-    <div class="quiz-progress" id="quiz-progress"></div>
-    <div class="quiz-q"    id="quiz-q"></div>
-    <div class="quiz-opts" id="quiz-opts"></div>
-    <div class="quiz-feedback" id="quiz-feedback"></div>
-    <div class="quiz-footer">
-      <button class="quiz-btn" id="quiz-next">Next →</button>
-      <div class="quiz-score" id="quiz-score"></div>
-    </div>
-  `;
-  document.getElementById('quiz-next').addEventListener('click', () => {
-    qIndex++;
-    if (qIndex >= shuffled.length) showResult(); else renderQuiz();
-  });
-  renderQuiz();
-}
-
-renderQuiz();
 
 /* ══════════════════════════════════════
-   TAB SWITCHING
+   UNIT SWITCHING
+══════════════════════════════════════ */
+function loadUnit(unitKey) {
+  currentUnit = unitKey;
+
+  document.querySelectorAll('.unit-tab').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.unit-tab[data-unit="${unitKey}"]`).classList.add('active');
+
+  renderTerms(unitKey);
+  renderTimeline(unitKey);
+  if (currentFeatureTab === 'quiz') {
+    initQuiz(unitKey);
+  }
+}
+
+document.querySelectorAll('.unit-tab').forEach(btn => {
+  btn.addEventListener('click', () => loadUnit(btn.dataset.unit));
+});
+
+/* ══════════════════════════════════════
+   FEATURE TAB SWITCHING
 ══════════════════════════════════════ */
 document.querySelectorAll('.nav-tab').forEach(btn => {
   btn.addEventListener('click', () => {
+    currentFeatureTab = btn.dataset.tab;
     document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+
+    if (currentFeatureTab === 'quiz') {
+      initQuiz(currentUnit);
+    }
   });
 });
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+loadUnit('wwi');
 </script>
 </body>
 </html>
